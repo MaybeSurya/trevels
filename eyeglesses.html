@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="description" content="Shop premium eyeglasses: men's, women's, kids, and computer/blue-light blocking glasses."}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eyewear Product Page</title>
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f9f4ef;
+        }
+
+        .main-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        /* ====================== HEADER ====================== */
+        header {
+            background: #f6f1e7;
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4a3728;
+            text-decoration: none;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 35px;
+            font-weight: 600;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a {
+            color: #4a3728;
+            text-decoration: none;
+            padding: 8px 0;
+            transition: 0.3s;
+        }
+
+        .dropdown > a:hover {
+            color: #d4a373;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            min-width: 220px;
+            padding: 12px 0;
+            border-radius: 6px;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: #444;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f9f4ef;
+            color: #d4a373;
+        }
+
+        /* ====================== HERO SECTION ====================== */
+        .hero {
+            display: flex;
+            min-height: 720px;
+            position: relative;
+        }
+
+        .left-panel {
+            flex: 1;
+            background: #f9f4ef;
+        }
+
+        .right-panel {
+            flex: 1;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .sunglasses-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 200%;
+            padding: 0 30px;
+        }
+
+        .elegante {
+            font-size: 108px;
+            font-weight: 900;
+            letter-spacing: 14px;
+            color: #4a3728;
+            text-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .accesorios {
+            font-size: 40px;
+            letter-spacing: 6px;
+            color: #7c5630;
+            margin-bottom: 6px;
+        }
+
+        .delaware {
+            font-size: 54px;
+            font-weight: bold;
+            color: #4a3728;
+        }
+
+        /* Bottom Bar */
+        .bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 50px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .social-icons a {
+            font-size: 24px;
+            margin-right: 20px;
+            color: #4a3728;
+            text-decoration: none;
+        }
+
+        .dots {
+            display: flex;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 13px;
+            height: 13px;
+            background: #ddd;
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background: #d4a373;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+            }
+            .right-panel {
+                height: 460px;
+            }
+            .elegante {
+                font-size: 72px;
+            }
+            .delaware {
+                font-size: 42px;
+            }
+            .main-nav {
+                gap: 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-container">
+      <a href="#">|About us|</a>
+      <a href="#">|Contact Us|</a>
+      <a href="#">|Eye Care|</a>
+      <a href="#">|New Arrivals|</a>
+      <a href="#">|Best Sellers|</a>
+      <a href="#">|Offline Stores|</a>
+      <a href="#">|Book Appointment|</a>
+      <a href="#">|Privacy Policy|</a>
+      <a href="#">|Help|</a>
+      <a href="payment.html">|Payment|</a>
+    </div>
+  </div>
+
+  <div class="main-container">
+
+        <!-- Header -->
+        <header>
+            <a href="#" class="logo">OpticAura</a>
+            
+            <nav class="main-nav">
+                <div class="dropdown">
+                    <a href="#" class="active">EYEGLASSES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Men's Eyeglasses</a></li>
+                        <li><a href="#">Women's Eyeglasses</a></li>
+                        <li><a href="#">Computer Glasses</a></li>
+                        <li><a href="#">Kids' Eyeglasses</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#">SUNGLASSES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Men's Sunglasses</a></li>
+                        <li><a href="#">Women's Sunglasses</a></li>
+                        <li><a href="#">Power Sunglasses</a></li>
+                        <li><a href="#">Sports Sunglasses</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#">CONTACTS</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Daily Disposable</a></li>
+                        <li><a href="#">Monthly Disposable</a></li>
+                        <li><a href="#">Colored Lenses</a></li>
+                        <li><a href="#">Contact Lens Care</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#">SPECIAL POWER</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">High Power Lenses</a></li>
+                        <li><a href="#">Cylinder Lenses</a></li>
+                        <li><a href="#">Photochromic</a></li>
+                        <li><a href="#">Blue Cut Lenses</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#">STORES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Find a Store</a></li>
+                        <li><a href="#">Punjab Stores</a></li>
+                        <li><a href="#">Book Eye Test</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="nav-icons" style="display: flex; gap: 22px; font-size: 24px; color: #4a3728;">
+                <span>♡</span>
+                <span>🔍</span>
+                <span>👤</span>
+                <span>🛒</span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="left-panel"></div>
+            <div class="right-panel">
+                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&q=80" 
+                     alt="Premium Sunglasses" class="sunglasses-img">
+            </div>
+
+            <div class="hero-text">
+              <h1 class="brand-name">VISIONA</h1>
+              <p class="tagline">PREMIUM EYEWEAR</p>
+              <p class="subtext">STYLE • CLARITY • CONFIDENCE</p>
+            </div>
+        </div>
+
+
+
+
+<!-- Men's Eyeglasses Section -->
+<section id="Meneyeglasses" class="category-section">
+  <h2>Men's Eyeglasses</h2>
+<!-- Product 1 -->
+<div class="product-grid">
+<div class="product-card">
+  <a href="product1.html">
+    <img src="product1.png" alt="Oversized Black Rectangular Eyeglasses">
+  </a>
+  <h4>Oversized Black Rectangular Eyeglasses</h4>
+  <p>₹2,400</p>
+  </div>
+
+<!-- Product 2 -->
+<div class="product-card">
+  <a href="product2.html">
+    <img src="product2.png" alt="John Jacobs Supreme Steel Double Bridge Eyeglasses">
+  </a>
+  <h4>John Jacobs Supreme Steel Double Bridge Eyeglasses</h4>
+  <p>₹4,100</p>
+  </div>
+
+<!-- Product 3 -->
+<div class="product-card">
+  <a href="product3.html">
+    <img src="product3.png" alt="Vincent Chase Bold Black Rectangular Eyeglasses">
+  </a>
+  <h4>Vincent Chase Bold Black Rectangular Eyeglasses</h4>
+  <p>₹1,400</p>
+  </div>
+
+<!-- Product 4 -->
+<div class="product-card">
+  <a href="product4.html">
+    <img src="product4.png" alt="Vincent Chase Black Red Accent Rectangular Eyeglasses">
+  </a>
+  <h4>Vincent Chase Black Red Accent Rectangular Eyeglasses</h4>
+  <p>₹1,699</p>
+  </div>
+
+<!-- Product 5 -->
+<div class="product-card">
+  <a href="product5.html">
+    <img src="product5.png" alt="Urban Edge Rectangle Frame">
+  </a>
+  <h4>Urban Edge Rectangle Frame</h4>
+  <p>₹3,099</p>
+  </div>
+
+<!-- Product 6 -->
+<div class="product-card">
+  <a href="product6.html">
+    <img src="product6.png" alt="Crystal Sleek Square Frame">
+  </a>
+  <h4>Crystal Sleek Square Frame</h4>
+  <p>₹2,990</p>
+  </div>
+
+<!-- Product 8 -->
+<div class="product-card">
+  <a href="product8.html">
+    <img src="product8.png" alt="Aviation Silver Double Bridge">
+  </a>
+  <h4>Aviation Silver Double Bridge</h4>
+  <p>₹2,299</p>
+  </div>
+
+<!-- Product 12 -->
+<div class="product-card">
+  <a href="product12.html">
+    <img src="product12.png" alt="Executive Gold Black Square">
+  </a>
+  <h4>Executive Gold Black Square</h4>
+  <p>₹1,799</p>
+  </div>
+
+<!-- Product 13.1 -->
+<div class="product-card">
+  <a href="product13.1.html">
+    <img src="product13.1.png" alt="Grey Aviator Eyeglasses">
+  </a>
+  <h4>Grey Aviator Eyeglasses</h4>
+  <p>₹1,099</p>
+  </div>
+
+<!-- Product 13.2 -->
+<div class="product-card">
+  <a href="product13.2.html">
+    <img src="product13.2.png" alt="Clear Blue Temple Rectangular">
+  </a>
+  <h4>Clear Blue Temple Rectangular</h4>
+  <p>₹999</p>
+  </div>
+
+<!-- Product 13.3 -->
+<div class="product-card">
+  <a href="product13.3.html">
+    <img src="product13.3.png" alt="Sage Green Rectangular">
+  </a>
+  <h4>Sage Green Rectangular</h4>
+  <p>₹1,049</p>
+  </div>
+  
+
+</div>
+      
+
+</section>
+
+<!-- Kid's Eyeglasses Section -->
+<section id="kidseyesglasses" class="category-section">
+  <h2>Kid's Eyeglasses</h2>
+  <div class="product-grid">
+
+    <!-- Product 14 -->
+    <div class="product-card">
+      <a href="product14.html">
+        <img src="product14.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Fun Color Pop Rectangle Kids Glasses</h4>
+<p>₹1,199</p>
+      </div>
+
+    <!-- Product 15 -->
+    <div class="product-card">
+      <a href="product15.html">
+        <img src="product15.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Bright Blue Rainbow Round Kids Glasses</h4>
+<p>₹1,249</p>
+      </div>
+
+    <!-- Product 16 -->
+    <div class="product-card">
+      <a href="product16.html">
+        <img src="product16.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Yellow Blue Energetic Rectangle Kids Glasses</h4>
+<p>₹1,199</p>
+      </div>
+
+    <!-- Product 17 -->
+    <div class="product-card">
+      <a href="product17.html">
+        <img src="product17.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Navy Blue Cool Cat-Eye Kids Glasses</h4>
+<p>₹1,349</p>
+      </div>
+
+    <!-- Product 18 -->
+    <div class="product-card">
+      <a href="product18.html">
+        <img src="product18.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Light Blue Kids Rectangular Glasses (8-12 Years)</h4>
+<p>₹799</p>
+      </div>
+
+    <!-- Product 19 -->
+    <div class="product-card">
+      <a href="product19.html">
+        <img src="product19.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Classic Black Rectangular Kids Glasses</h4>
+<p>₹899</p>
+      </div>
+
+    <!-- Product 20 -->
+    <div class="product-card">
+      <a href="product20.html">
+        <img src="product20.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Batman Black & Red Kids Glasses</h4>
+<p>₹849</p>
+      </div>
+
+    <!-- Product 21 -->
+    <div class="product-card">
+      <a href="product21.html">
+        <img src="product21.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Pink Translucent Rectangular Kids Glasses</h4>
+<p>₹899</p>
+      </div>
+
+    <!-- Product 22 -->
+    <div class="product-card">
+      <a href="product22.html">
+        <img src="product22.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Grey Cat-Eye Kids Glasses</h4>
+<p>₹999</p>
+      </div>
+
+    <!-- Product 23 -->
+    <div class="product-card">
+      <a href="product23.html">
+        <img src="product23.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Black & Gold Premium Kids Glasses</h4>
+<p>₹1,099</p>
+      </div>
+
+    <!-- Product 24 -->
+    <div class="product-card">
+      <a href="product24.html">
+        <img src="product24.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Deep Blue Rectangular Kids Glasses</h4>
+<p>₹949</p>
+      </div>
+
+    <!-- Product 25 -->
+    <div class="product-card">
+      <a href="product25.html">
+        <img src="product25.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Clear Aviator Kids Glasses</h4>
+<p>₹999</p>
+      </div>
+
+    <!-- Product 26 -->
+    <div class="product-card">
+      <a href="product26.html">
+        <img src="product26.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Blue Metal Kids Rectangular Glasses</h4>
+      <p>₹1,099</p>
+      <   </div>
+
+    <!-- Product 27 -->
+    <div class="product-card">
+      <a href="product27.html">
+        <img src="product27.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Blue Black Tortoise Kids Glasses</h4>
+      <p>₹999</p>
+      <   </div>
+
+    <!-- Product 28 -->
+    <div class="product-card">
+      <a href="product28.html">
+        <img src="product28.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Soft Beige Round Kids Glasses</h4>
+      <p>₹949</p>
+      <   </div>
+
+    <!-- Product 29 -->
+    <div class="product-card">
+      <a href="product29.html">
+        <img src="product29.png" alt="Kids Eyeglasses">
+      </a>
+      <h4>Rimless Gold Black Kids Glasses</h4>
+      <p>₹1,299</p>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="womeneyeglasses" class="category-section">
+  <h2>Women's Eyeglasses</h2>
+  <div class="product-grid">
+
+    <!-- Product 30 -->
+    <div class="product-card">
+      <a href="product30.html">
+        <img src="product30.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Pink Octagonal Women's Glasses</h4>
+      <p>₹1,049</p>
+    </div>
+
+    <!-- Product 31 -->
+    <div class="product-card">
+      <a href="product31.html">
+        <img src="product31.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Navy Blue Double Bridge Women's Glasses</h4>
+      <p>₹1,099</p>
+    </div>
+
+    <!-- Product 32 -->
+    <div class="product-card">
+      <a href="product32.html">
+        <img src="product32.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Rimless Pink & Gold Women's Glasses</h4>
+      <p>₹1,199</p>
+    </div>
+
+    <!-- Product 33 -->
+    <div class="product-card">
+      <a href="product33.html">
+        <img src="product33.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Peach Cat-Eye Women's Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 34 -->
+    <div class="product-card">
+      <a href="product34.html">
+        <img src="product34.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Black & Rose Gold Octagonal Women's Glasses</h4>
+      <p>₹1,099</p>
+    </div>
+
+    <!-- Product 35 -->
+    <div class="product-card">
+      <a href="product35.html">
+        <img src="product35.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Sky Blue Round Women's Glasses</h4>
+      <p>₹949</p>
+    </div>
+
+    <!-- Product 36 -->
+    <div class="product-card">
+      <a href="product36.html">
+        <img src="product36.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Light Blue Rectangular Women's Glasses</h4>
+      <p>₹899</p>
+    </div>
+
+    <!-- Product 37 -->
+    <div class="product-card">
+      <a href="product37.html">
+        <img src="product37.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Gold & Tortoise Hexagonal Women's Glasses</h4>
+      <p>₹1,149</p>
+    </div>
+
+    <!-- Product 38 -->
+    <div class="product-card">
+      <a href="product38.html">
+        <img src="product38.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Blue Transparent Rectangular Women's Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 39 -->
+    <div class="product-card">
+      <a href="product39.html">
+        <img src="product39.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Pink Cat-Eye Women's Glasses</h4>
+      <p>₹949</p>
+    </div>
+
+    <!-- Product 40 -->
+    <div class="product-card">
+      <a href="product40.html">
+        <img src="product40.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Transparent Grey Rectangular Women's Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 41 -->
+    <div class="product-card">
+      <a href="product41.html">
+        <img src="product41.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Rimless Rose Gold Women's Glasses</h4>
+      <p>₹1,199</p>
+    </div>
+
+    <!-- Product 42 -->
+    <div class="product-card">
+      <a href="product42.html">
+        <img src="product42.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Floral Peach Rectangular Women's Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 43 -->
+    <div class="product-card">
+      <a href="product43.html">
+        <img src="product43.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Black & Rose Gold Semi-Rimless Women's Glasses</h4>
+      <p>₹1,199</p>
+    </div>
+
+    <!-- Product 44 -->
+    <div class="product-card">
+      <a href="product44.html">
+        <img src="product44.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Rose Gold Round Women's Glasses</h4>
+      <p>₹1,149</p>
+    </div>
+
+    <!-- Product 45 -->
+    <div class="product-card">
+      <a href="product45.html">
+        <img src="product45.png" alt="Women's Eyeglasses">
+      </a>
+      <h4>Purple Round Women's Glasses</h4>
+      <p>₹1,099</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section id="computereyesglasses" class="category-section">
+  <h2>Computer Glasses / Blue Light Blocking Glasses</h2>
+  <div class="product-grid">
+
+    <!-- Product 46 -->
+    <div class="product-card">
+      <a href="product46.html">
+        <img src="product46.png" alt="Computer Glasses">
+      </a>
+      <h4>Matte Black Blue Light Blocking Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 47 -->
+    <div class="product-card">
+      <a href="product47.html">
+        <img src="product47.png" alt="Computer Glasses">
+      </a>
+      <h4>Blue Light Blocking Rectangular Glasses</h4>
+      <p>₹1,049</p>
+    </div>
+
+    <!-- Product 48 -->
+    <div class="product-card">
+      <a href="product48.html">
+        <img src="product48.png" alt="Computer Glasses">
+      </a>
+      <h4>Tortoise Shell Blue Light Glasses</h4>
+      <p>₹1,049</p>
+    </div>
+
+    <!-- Product 49 -->
+    <div class="product-card">
+      <a href="product49.html">
+        <img src="product49.png" alt="Computer Glasses">
+      </a>
+      <h4>Clear Square Blue Light Blocking Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 50 -->
+    <div class="product-card">
+      <a href="product50.html">
+        <img src="product50.png" alt="Computer Glasses">
+      </a>
+      <h4>Olive Green Blue Light Blocking Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 51 -->
+    <div class="product-card">
+      <a href="product51.html">
+        <img src="product51.png" alt="Computer Glasses">
+      </a>
+      <h4>Dark Grey Cat-Eye Blue Light Glasses</h4>
+      <p>₹1,099</p>
+    </div>
+
+    <!-- Product 52 -->
+    <div class="product-card">
+      <a href="product52.html">
+        <img src="product52.png" alt="Computer Glasses">
+      </a>
+      <h4>Grey Transparent Blue Light Blocking Glasses</h4>
+      <p>₹949</p>
+    </div>
+
+    <!-- Product 53 -->
+    <div class="product-card">
+      <a href="product53.html">
+        <img src="product53.png" alt="Computer Glasses">
+      </a>
+      <h4>Black & Silver Cat-Eye Blue Light Glasses</h4>
+      <p>₹1,099</p>
+    </div>
+
+    <!-- Product 54 -->
+    <div class="product-card">
+      <a href="product54.html">
+        <img src="product54.png" alt="Computer Glasses">
+      </a>
+      <h4>Blue Aviator Blue Light Blocking Glasses</h4>
+      <p>₹1,049</p>
+    </div>
+
+    <!-- Product 55 -->
+    <div class="product-card">
+      <a href="product55.html">
+        <img src="product55.png" alt="Computer Glasses">
+      </a>
+      <h4>Black Geometric Blue Light Glasses</h4>
+      <p>₹1,049</p>
+    </div>
+
+    <!-- Product 56 -->
+    <div class="product-card">
+      <a href="product56.html">
+        <img src="product56.png" alt="Computer Glasses">
+      </a>
+      <h4>Blue Tortoise Blue Light Blocking Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 57 -->
+    <div class="product-card">
+      <a href="product57.html">
+        <img src="product57.png" alt="Computer Glasses">
+      </a>
+      <h4>Clear Square Black Temple Blue Light Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 58 -->
+    <div class="product-card">
+      <a href="product58.html">
+        <img src="product58.png" alt="Computer Glasses">
+      </a>
+      <h4>Black & Blue Two-Tone Blue Light Glasses</h4>
+      <p>₹999</p>
+    </div>
+
+    <!-- Product 59 -->
+    <div class="product-card">
+      <a href="product59.html">
+        <img src="product59.png" alt="Computer Glasses">
+      </a>
+      <h4>Matte Navy Blue Blue Light Blocking Glasses</h4>
+      <p>₹949</p>
+    </div>
+
+    <!-- Product 60 -->
+    <div class="product-card">
+      <a href="product60.html">
+        <img src="product60.png" alt="Computer Glasses">
+      </a>
+      <h4>Green Yellow Tint Gaming & Computer Glasses</h4>
+      <p>₹1,299</p>
+    </div>
+
+    <!-- Product 61 -->
+    <div class="product-card">
+      <a href="product61.html">
+        <img src="product61.png" alt="Computer Glasses">
+      </a>
+      <h4>Black Silver Rectangular Blue Light Glasses</h4>
+      <p>₹1,099</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+
+      <div class="footer-col footer-logo">
+        <h2>OpticAura</h2>
+        <p>Your trusted eyewear partner. Shop premium eyeglasses, sunglasses, contact lenses & more with home try-on.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Eyeglasses</a></li>
+          <li><a href="#">Sunglasses</a></li>
+          <li><a href="#">Contact Lenses</a></li>
+          <li><a href="#">Power Sunglasses</a></li>
+          <li><a href="#">Computer Glasses</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Help & Support</h3>
+        <ul>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Return & Refund</a></li>
+          <li><a href="#">Cancellation Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div style="margin-top: 25px;">
+          <h4 style="margin-bottom:10px;">We Accept</h4>
+          <div class="payment-methods">
+            <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+            <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+            <img src="https://img.icons8.com/color/48/000000/rupay.png" alt="Rupay">
+            <img src="https://img.icons8.com/color/48/000000/paytm.png" alt="Paytm">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bottom-bar">
+      © 2026 OpticAura. All Rights Reserved. 
+      <br style="margin:8px 0;">
+      <a href="#" style="color:#bbb; margin:0 10px;">Privacy Policy</a> • 
+      <a href="#" style="color:#bbb; margin:0 10px;">Terms of Use</a> • 
+      <a href="#" style="color:#bbb; margin:0 10px;">Sitemap</a>
+    </div>
+  </footer>
+
+</body>
+</html>

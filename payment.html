@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Buy Now - Payment</title>
+	<style>
+		:root {
+			--bg: #f4efe8;
+			--card: #fffdf9;
+			--ink: #1e1b18;
+			--muted: #6a625a;
+			--line: #d8cfc4;
+			--accent: #0f766e;
+			--accent-dark: #0b5f59;
+			--focus: #f59e0b;
+			--danger: #b91c1c;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			color: var(--ink);
+			background:
+				radial-gradient(circle at 10% 10%, #f8d9b4 0%, transparent 28%),
+				radial-gradient(circle at 90% 80%, #b8e4dc 0%, transparent 32%),
+				var(--bg);
+			min-height: 100vh;
+			padding: 24px;
+		}
+
+		.wrapper {
+			max-width: 980px;
+			margin: 0 auto;
+		}
+
+		.hero {
+			background: linear-gradient(120deg, #1f2937, #334155);
+			color: #fff;
+			border-radius: 18px;
+			padding: 28px;
+			margin-bottom: 20px;
+			box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+		}
+
+		.hero h1 {
+			margin: 0 0 8px;
+			font-size: clamp(1.5rem, 3vw, 2rem);
+			letter-spacing: 0.02em;
+		}
+
+		.hero p {
+			margin: 0;
+			color: #d1d5db;
+			font-size: 0.95rem;
+		}
+
+		.buy-now-card {
+			background: var(--card);
+			border: 1px solid var(--line);
+			border-radius: 18px;
+			box-shadow: 0 12px 26px rgba(42, 31, 18, 0.12);
+			overflow: hidden;
+		}
+
+		.card-header {
+			padding: 20px 24px;
+			border-bottom: 1px solid var(--line);
+			background: #fff;
+		}
+
+		.card-header h2 {
+			margin: 0;
+			font-size: 1.25rem;
+		}
+
+		.card-header small {
+			color: var(--muted);
+		}
+
+		form {
+			padding: 22px;
+			display: grid;
+			gap: 20px;
+		}
+
+		.section {
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			padding: 16px;
+			background: #fff;
+		}
+
+		.section h3 {
+			margin: 0 0 12px;
+			font-size: 1rem;
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.full {
+			grid-column: 1 / -1;
+		}
+
+		label {
+			display: block;
+			font-size: 0.85rem;
+			margin-bottom: 6px;
+			color: var(--muted);
+		}
+
+		input,
+		textarea,
+		select {
+			width: 100%;
+			border: 1px solid #c8bfb2;
+			border-radius: 10px;
+			padding: 10px 12px;
+			font: inherit;
+			color: var(--ink);
+			background: #fff;
+		}
+
+		textarea {
+			min-height: 90px;
+			resize: vertical;
+		}
+
+		input:focus,
+		textarea:focus,
+		select:focus {
+			outline: 2px solid var(--focus);
+			outline-offset: 1px;
+			border-color: transparent;
+		}
+
+		.payment-options {
+			display: grid;
+			gap: 10px;
+		}
+
+		.pay-item {
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			padding: 10px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			background: #fffcf8;
+		}
+
+		.pay-item input {
+			width: auto;
+			margin: 0;
+		}
+
+		.summary {
+			display: grid;
+			gap: 8px;
+			background: #f8fafc;
+			border: 1px dashed #b2c0d2;
+			border-radius: 12px;
+			padding: 12px;
+		}
+
+		.row {
+			display: flex;
+			justify-content: space-between;
+			gap: 12px;
+			font-size: 0.95rem;
+		}
+
+		.total {
+			font-weight: 700;
+			color: #111827;
+			padding-top: 8px;
+			border-top: 1px solid #d7e0eb;
+		}
+
+		.actions {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.note {
+			color: var(--muted);
+			font-size: 0.82rem;
+			max-width: 520px;
+		}
+
+		.buy-btn {
+			border: 0;
+			background: var(--accent);
+			color: #fff;
+			font-weight: 700;
+			letter-spacing: 0.03em;
+			border-radius: 999px;
+			padding: 12px 24px;
+			cursor: pointer;
+			transition: background 0.2s ease, transform 0.2s ease;
+		}
+
+		.buy-btn:hover {
+			background: var(--accent-dark);
+			transform: translateY(-1px);
+		}
+
+		.buy-btn:active {
+			transform: translateY(0);
+		}
+
+		.required {
+			color: var(--danger);
+			font-weight: 700;
+		}
+
+		@media (max-width: 720px) {
+			body {
+				padding: 14px;
+			}
+
+			.hero,
+			.card-header,
+			form {
+				padding: 16px;
+			}
+
+			.grid {
+				grid-template-columns: 1fr;
+			}
+
+			.actions {
+				align-items: stretch;
+			}
+
+			.buy-btn {
+				width: 100%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<section class="hero" aria-label="Checkout header">
+			<h1>Buy Now Checkout</h1>
+			<p>Complete your details below to place your order.</p>
+		</section>
+
+		<section class="buy-now-card" aria-label="Payment form">
+			<div class="card-header">
+				<h2>Secure Payment Form</h2>
+				<small>Fields marked with <span class="required">*</span> are required.</small>
+			</div>
+
+			<form action="#" method="post">
+				<div class="section">
+					<h3>Customer Details</h3>
+					<div class="grid">
+						<div>
+							<label for="fullName">Full Name <span class="required">*</span></label>
+							<input id="fullName" name="fullName" type="text" required placeholder="Enter your full name">
+						</div>
+						<div>
+							<label for="phone">Phone Number <span class="required">*</span></label>
+							<input id="phone" name="phone" type="tel" required placeholder="10-digit mobile number">
+						</div>
+						<div class="full">
+							<label for="email">Email Address <span class="required">*</span></label>
+							<input id="email" name="email" type="email" required placeholder="you@example.com">
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h3>Shipping Address</h3>
+					<div class="grid">
+						<div class="full">
+							<label for="address">Street Address <span class="required">*</span></label>
+							<textarea id="address" name="address" required placeholder="House no., street, area"></textarea>
+						</div>
+						<div>
+							<label for="city">City <span class="required">*</span></label>
+							<input id="city" name="city" type="text" required>
+						</div>
+						<div>
+							<label for="state">State <span class="required">*</span></label>
+							<input id="state" name="state" type="text" required>
+						</div>
+						<div>
+							<label for="zip">Pin Code <span class="required">*</span></label>
+							<input id="zip" name="zip" type="text" required>
+						</div>
+						<div>
+							<label for="country">Country</label>
+							<input id="country" name="country" type="text" value="India">
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h3>Payment Method</h3>
+					<div class="payment-options" role="radiogroup" aria-label="Choose payment method">
+						<label class="pay-item" for="card">
+							<input id="card" type="radio" name="paymentMethod" value="Card" checked>
+							Credit / Debit Card
+						</label>
+						<label class="pay-item" for="upi">
+							<input id="upi" type="radio" name="paymentMethod" value="UPI">
+							UPI Payment
+						</label>
+						<label class="pay-item" for="cod">
+							<input id="cod" type="radio" name="paymentMethod" value="COD">
+							Cash on Delivery
+						</label>
+					</div>
+
+					<div class="grid" style="margin-top: 12px;">
+						<div class="full">
+							<label for="cardName">Name on Card</label>
+							<input id="cardName" name="cardName" type="text" placeholder="As shown on card">
+						</div>
+						<div class="full">
+							<label for="cardNumber">Card Number</label>
+							<input id="cardNumber" name="cardNumber" type="text" placeholder="XXXX XXXX XXXX XXXX">
+						</div>
+						<div>
+							<label for="expiry">Expiry</label>
+							<input id="expiry" name="expiry" type="text" placeholder="MM/YY">
+						</div>
+						<div>
+							<label for="cvv">CVV</label>
+							<input id="cvv" name="cvv" type="password" placeholder="***">
+						</div>
+						<div class="full">
+							<label for="upiId">UPI ID</label>
+							<input id="upiId" name="upiId" type="text" placeholder="yourname@upi">
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h3>Order Summary</h3>
+					<div class="summary">
+						<div class="row"><span>Item Total</span><strong>₹1,999</strong></div>
+						<div class="row"><span>Shipping</span><strong>₹99</strong></div>
+						<div class="row"><span>Discount</span><strong>-₹100</strong></div>
+						<div class="row total"><span>Total Payable</span><span>₹1,998</span></div>
+					</div>
+				</div>
+
+				<div class="actions">
+					<p class="note">By placing this order, you agree to the terms and authorize us to process your payment details.</p>
+					<button class="buy-btn" type="submit">BUY NOW</button>
+				</div>
+			</form>
+		</section>
+	</div>
+</body>
+</html>
