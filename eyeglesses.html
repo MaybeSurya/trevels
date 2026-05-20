@@ -24,6 +24,8 @@
             box-shadow: 0 5px 25px rgba(0,0,0,0.1);
         }
 
+
+
         /* ====================== HEADER ====================== */
         header {
             background: #f6f1e7;
@@ -94,67 +96,15 @@
             color: #d4a373;
         }
 
-        /* ====================== HERO SECTION ====================== */
-        .hero {
-            display: flex;
-            min-height: 720px;
-            position: relative;
-        }
-
-        .left-panel {
-            flex: 1;
-            background: #f9f4ef;
-        }
-
-        .right-panel {
-            flex: 1;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .sunglasses-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-text {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 10;
-            width: 200%;
-            padding: 0 30px;
-        }
-
-        .elegante {
-            font-size: 108px;
-            font-weight: 900;
-            letter-spacing: 14px;
-            color: #4a3728;
-            text-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            margin-bottom: 10px;
-        }
-
-        .accesorios {
-            font-size: 40px;
-            letter-spacing: 6px;
-            color: #7c5630;
-            margin-bottom: 6px;
-        }
-
-        .delaware {
-            font-size: 54px;
-            font-weight: bold;
-            color: #4a3728;
-        }
 
         /* Bottom Bar */
+
+        .background_img {
+            background-image: url("eyeglasses_background_img.png");
+            background-size: cover;
+            background-position: center;
+            height: 600px;
+        }
         .bottom-bar {
             display: flex;
             justify-content: space-between;
@@ -187,27 +137,336 @@
             background: #d4a373;
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-            }
-            .right-panel {
-                height: 460px;
-            }
-            .elegante {
-                font-size: 72px;
-            }
-            .delaware {
-                font-size: 42px;
-            }
-            .main-nav {
-                gap: 20px;
-                font-size: 14px;
-            }
+        /* section_1 */
+
+        .hero_text {
+          width:70%;
+          padding: 60px 40px;
         }
-    </style>
-  <link rel="stylesheet" href="style1.css">
+
+        .hero_h1{
+          font-size: 64px;
+          color: #4a3728;
+          margin-bottom: 20px;
+        }
+
+        .hero_h3{
+          font-size: 25px;
+          color: #4a3728;
+          line-height: 1.3;
+        }
+
+        .section_1 {
+          position: relative;
+        }
+
+        .floating_img {
+          position: absolute;
+          top:25%;
+          right:5%;          
+        }
+
+        .floating_img img {
+          width: 350px;
+          height: 600px;
+          border:10px solid #ddd;
+        }
+
+        .floating_img2 {
+          position: absolute;
+          bottom:-60%;
+          left:5%; 
+          z-index: 100;         
+        }
+
+        .floating_img2 img {
+          width: 350px;
+          height: 600px;
+          border:10px solid #ddd;
+        }
+
+
+
+.container{
+  width:100%;
+  height:100vh;
+  background:white;
+  position:relative;
+  overflow:hidden;
+  padding:4vw;
+  z-index: 1;
+}
+
+/* LEFT TEXT */
+.left-content{
+  width:28%;
+  position:absolute;
+  top:12%;
+  left:5%;
+}
+
+/* LEFT IMAGE */
+.left-img{
+  position:absolute;
+  bottom:10%;
+  left:5%;
+}
+
+.left-img img{
+  width:22vw;
+  height:14vw;
+  object-fit:cover;
+  border:10px solid #ddd;
+}
+
+/* CENTER BIG TEXT */
+.vertical-text{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%) rotate(-90deg);
+  font-size:7vw;
+  font-family:"Times New Roman", serif;
+  letter-spacing:0.5vw;
+  color:black;
+  z-index:2;
+}
+
+/* PINK BOX */
+.pink-box{
+  width:18vw;
+  height:14vw;
+  background:#f6c6c6;
+  position:absolute;
+  top:32%;
+  left:42%;
+  z-index:0;
+}
+
+/* RIGHT IMAGE */
+.right-img{
+  position:absolute;
+  top:6%;
+  right:6%;
+  z-index:2;
+}
+
+.right-img img{
+  width:20vw;
+  height:26vw;
+  object-fit:cover;
+  border:10px solid #ddd;
+}
+
+/* BOTTOM RIGHT */
+.bottom-right{
+  position:absolute;
+  bottom:10%;
+  right:8%;
+  display:flex;
+  align-items:center;
+  gap:1.5vw;
+}
+
+.circle{
+  position: relative;
+  width:10vw;
+  height:10vw;
+  border:2px solid black;
+  border-top-left-radius:50%;
+  border-bottom-left-radius:50%;
+  right:-30%;
+}
+
+.number{
+  font-size:4vw;
+  font-weight:bold;
+}
+
+.left-content h2{
+  font-size:3vw;
+  margin-top:10vw;
+}
+
+.left-content p{
+  font-size:1.5vw;
+}
+/* ====================== RESPONSIVE DESIGN ====================== */
+
+/* Tablet (1024px and below) */
+@media (max-width: 1024px) {
+    .hero_text {
+        width: 60%;
+        padding: 40px 30px;
+    }
+    
+    .hero_h1 {
+        font-size: 52px;
+    }
+    
+    .hero_h3 {
+        font-size: 22px;
+    }
+    
+    .floating_img img,
+    .floating_img2 img {
+        width: 280px;
+        height: 480px;
+    }
+}
+
+/* Small Tablet & Large Mobile (768px and below) */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .main-nav {
+        gap: 20px;
+        font-size: 15px;
+    }
+    
+    .background_img {
+        height: 450px;
+    }
+    
+    .hero_text {
+        width: 100%;
+        padding: 30px 20px;
+        text-align: center;
+    }
+    
+    .hero_h1 {
+        font-size: 42px;
+    }
+    
+    .hero_h3 {
+        font-size: 20px;
+    }
+    
+    .floating_img,
+    .floating_img2 {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin: 20px auto;
+        text-align: center;
+    }
+    
+    .floating_img img,
+    .floating_img2 img {
+        width: 220px;
+        height: 380px;
+    }
+    
+    /* Hide complex overlapping sections on mobile */
+    .container {
+        height: auto;
+        padding: 40px 15px;
+        overflow: visible;
+    }
+    
+    .left-content,
+    .left-img,
+    .vertical-text,
+    .pink-box,
+    .right-img,
+    .bottom-right {
+        position: relative;
+        width: 100%;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        transform: none;
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .vertical-text {
+        transform: none;
+        font-size: 9vw;
+        writing-mode: horizontal-tb;
+        margin: 30px 0;
+    }
+    
+    .pink-box {
+        display: none; /* Hide on small screens */
+    }
+    
+    .left-img img,
+    .right-img img {
+        width: 80%;
+        height: auto;
+        max-width: 300px;
+    }
+    
+    .bottom-right {
+        justify-content: center;
+    }
+    
+    .circle {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .number {
+        font-size: 28px;
+    }
+    
+    .left-content h2 {
+        font-size: 6vw;
+    }
+    
+    .left-content p {
+        font-size: 4vw;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .hero_h1 {
+        font-size: 36px;
+    }
+    
+    .hero_h3 {
+        font-size: 18px;
+    }
+    
+    header {
+        padding: 12px 15px;
+    }
+    
+    .logo {
+        font-size: 26px;
+    }
+    
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .container {
+        padding: 30px 10px;
+    }
+    
+    .floating_img img,
+    .floating_img2 img,
+    .left-img img,
+    .right-img img {
+        width: 90%;
+        max-width: 260px;
+        height: auto;
+    }
+}
+
+</style>
+<link rel="stylesheet" href="style1.css">
 </head>
 <body>
 
@@ -292,21 +551,59 @@
             </div>
         </header>
 
-        <!-- Hero Section -->
-        <div class="hero">
-            <div class="left-panel"></div>
-            <div class="right-panel">
-                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&q=80" 
-                     alt="Premium Sunglasses" class="sunglasses-img">
-            </div>
 
-            <div class="hero-text">
-              <h1 class="brand-name">VISIONA</h1>
-              <p class="tagline">PREMIUM EYEWEAR</p>
-              <p class="subtext">STYLE • CLARITY • CONFIDENCE</p>
-            </div>
-        </div>
+<section id="section_1">
+  <div class="hero_text">
+    <h1 class="hero_h1">Elevate your style with perfect sunglasses</h1>
+    <h3 class="hero_h3">Discover the perfect blend of fashion and protection. Our latest collection offers cutting-edge designs that complement every look and protect your eyes.</h3>
+  </div>
+  <div class="background_img"></div>
+  <div class="floating_img">
+    <img src="eyeglasses_img.png" alt="Floating Eyeglasses">
+  </div>
+  <div class="floating_img2">
+    <img src="eyeglasses_img2.png" alt="Floating Eyeglasses">
+  </div>
+</section>
 
+<section id="section_2">
+   <div class="container">
+
+    <!-- Left Content -->
+    <div class="left-content">
+      <!-- <div class="line"></div> -->
+
+      <h2>Perfect Vision. Perfect Fashion.</h2>
+
+      <p>Eyewear that blends elegance with modern trends.</p>
+    </div>
+
+    <!-- Left Image -->
+    <div class="left-img">
+      <img src="eyeglasses.img3.png" alt="">
+    </div>
+
+    <!-- Pink Box -->
+    <div class="pink-box"></div>
+
+    <!-- Vertical Text -->
+    <div class="vertical-text">
+      VISORA
+    </div>
+
+    <!-- Right Image -->
+    <div class="right-img">
+      <img src="eyeglasses.img4.png" alt="">
+    </div>
+
+    <!-- Bottom Right -->
+    <div class="bottom-right">
+      <div class="circle"></div>
+      <div class="number"></div>
+    </div>
+
+  </div>
+</section>
 
 
 
@@ -314,6 +611,7 @@
 <section id="Meneyeglasses" class="category-section">
   <h2>Men's Eyeglasses</h2>
 <!-- Product 1 -->
+
 <div class="product-grid">
 <div class="product-card">
   <a href="product1.html">
@@ -321,7 +619,7 @@
   </a>
   <h4>Oversized Black Rectangular Eyeglasses</h4>
   <p>₹2,400</p>
-  </div>
+</div>
 
 <!-- Product 2 -->
 <div class="product-card">
@@ -330,7 +628,7 @@
   </a>
   <h4>John Jacobs Supreme Steel Double Bridge Eyeglasses</h4>
   <p>₹4,100</p>
-  </div>
+</div>
 
 <!-- Product 3 -->
 <div class="product-card">
@@ -339,7 +637,7 @@
   </a>
   <h4>Vincent Chase Bold Black Rectangular Eyeglasses</h4>
   <p>₹1,400</p>
-  </div>
+</div>
 
 <!-- Product 4 -->
 <div class="product-card">
@@ -348,7 +646,7 @@
   </a>
   <h4>Vincent Chase Black Red Accent Rectangular Eyeglasses</h4>
   <p>₹1,699</p>
-  </div>
+</div>
 
 <!-- Product 5 -->
 <div class="product-card">
@@ -357,7 +655,7 @@
   </a>
   <h4>Urban Edge Rectangle Frame</h4>
   <p>₹3,099</p>
-  </div>
+</div>
 
 <!-- Product 6 -->
 <div class="product-card">
@@ -366,7 +664,7 @@
   </a>
   <h4>Crystal Sleek Square Frame</h4>
   <p>₹2,990</p>
-  </div>
+</div>
 
 <!-- Product 8 -->
 <div class="product-card">
@@ -375,7 +673,7 @@
   </a>
   <h4>Aviation Silver Double Bridge</h4>
   <p>₹2,299</p>
-  </div>
+</div>
 
 <!-- Product 12 -->
 <div class="product-card">
@@ -384,7 +682,7 @@
   </a>
   <h4>Executive Gold Black Square</h4>
   <p>₹1,799</p>
-  </div>
+</div>
 
 <!-- Product 13.1 -->
 <div class="product-card">
@@ -393,7 +691,7 @@
   </a>
   <h4>Grey Aviator Eyeglasses</h4>
   <p>₹1,099</p>
-  </div>
+</div>
 
 <!-- Product 13.2 -->
 <div class="product-card">
@@ -402,7 +700,7 @@
   </a>
   <h4>Clear Blue Temple Rectangular</h4>
   <p>₹999</p>
-  </div>
+</div>
 
 <!-- Product 13.3 -->
 <div class="product-card">
@@ -411,8 +709,8 @@
   </a>
   <h4>Sage Green Rectangular</h4>
   <p>₹1,049</p>
-  </div>
-  
+</div>
+
 
 </div>
       
@@ -430,8 +728,8 @@
         <img src="product14.png" alt="Kids Eyeglasses">
       </a>
       <h4>Fun Color Pop Rectangle Kids Glasses</h4>
-<p>₹1,199</p>
-      </div>
+      <p>₹1,199</p>
+    </div>
 
     <!-- Product 15 -->
     <div class="product-card">
@@ -439,8 +737,8 @@
         <img src="product15.png" alt="Kids Eyeglasses">
       </a>
       <h4>Bright Blue Rainbow Round Kids Glasses</h4>
-<p>₹1,249</p>
-      </div>
+      <p>₹1,249</p>
+    </div>
 
     <!-- Product 16 -->
     <div class="product-card">
@@ -448,8 +746,8 @@
         <img src="product16.png" alt="Kids Eyeglasses">
       </a>
       <h4>Yellow Blue Energetic Rectangle Kids Glasses</h4>
-<p>₹1,199</p>
-      </div>
+      <p>₹1,199</p>
+    </div>
 
     <!-- Product 17 -->
     <div class="product-card">
@@ -457,8 +755,8 @@
         <img src="product17.png" alt="Kids Eyeglasses">
       </a>
       <h4>Navy Blue Cool Cat-Eye Kids Glasses</h4>
-<p>₹1,349</p>
-      </div>
+      <p>₹1,349</p>
+    </div>
 
     <!-- Product 18 -->
     <div class="product-card">
@@ -466,8 +764,8 @@
         <img src="product18.png" alt="Kids Eyeglasses">
       </a>
       <h4>Light Blue Kids Rectangular Glasses (8-12 Years)</h4>
-<p>₹799</p>
-      </div>
+      <p>₹799</p>
+    </div>
 
     <!-- Product 19 -->
     <div class="product-card">
@@ -475,8 +773,8 @@
         <img src="product19.png" alt="Kids Eyeglasses">
       </a>
       <h4>Classic Black Rectangular Kids Glasses</h4>
-<p>₹899</p>
-      </div>
+      <p>₹899</p>
+    </div>
 
     <!-- Product 20 -->
     <div class="product-card">
@@ -484,8 +782,8 @@
         <img src="product20.png" alt="Kids Eyeglasses">
       </a>
       <h4>Batman Black & Red Kids Glasses</h4>
-<p>₹849</p>
-      </div>
+      <p>₹849</p>
+    </div>
 
     <!-- Product 21 -->
     <div class="product-card">
@@ -493,8 +791,8 @@
         <img src="product21.png" alt="Kids Eyeglasses">
       </a>
       <h4>Pink Translucent Rectangular Kids Glasses</h4>
-<p>₹899</p>
-      </div>
+      <p>₹899</p>
+    </div>
 
     <!-- Product 22 -->
     <div class="product-card">
@@ -502,8 +800,8 @@
         <img src="product22.png" alt="Kids Eyeglasses">
       </a>
       <h4>Grey Cat-Eye Kids Glasses</h4>
-<p>₹999</p>
-      </div>
+      <p>₹999</p>
+    </div>
 
     <!-- Product 23 -->
     <div class="product-card">
@@ -511,8 +809,8 @@
         <img src="product23.png" alt="Kids Eyeglasses">
       </a>
       <h4>Black & Gold Premium Kids Glasses</h4>
-<p>₹1,099</p>
-      </div>
+      <p>₹1,099</p>
+    </div>
 
     <!-- Product 24 -->
     <div class="product-card">
@@ -520,8 +818,8 @@
         <img src="product24.png" alt="Kids Eyeglasses">
       </a>
       <h4>Deep Blue Rectangular Kids Glasses</h4>
-<p>₹949</p>
-      </div>
+      <p>₹949</p>
+    </div>
 
     <!-- Product 25 -->
     <div class="product-card">
@@ -529,8 +827,8 @@
         <img src="product25.png" alt="Kids Eyeglasses">
       </a>
       <h4>Clear Aviator Kids Glasses</h4>
-<p>₹999</p>
-      </div>
+      <p>₹999</p>
+    </div>
 
     <!-- Product 26 -->
     <div class="product-card">
@@ -539,7 +837,7 @@
       </a>
       <h4>Blue Metal Kids Rectangular Glasses</h4>
       <p>₹1,099</p>
-      <   </div>
+    </div>
 
     <!-- Product 27 -->
     <div class="product-card">
@@ -548,7 +846,7 @@
       </a>
       <h4>Blue Black Tortoise Kids Glasses</h4>
       <p>₹999</p>
-      <   </div>
+    </div>
 
     <!-- Product 28 -->
     <div class="product-card">
@@ -557,7 +855,7 @@
       </a>
       <h4>Soft Beige Round Kids Glasses</h4>
       <p>₹949</p>
-      <   </div>
+    </div>
 
     <!-- Product 29 -->
     <div class="product-card">
@@ -943,6 +1241,67 @@
       <a href="#" style="color:#bbb; margin:0 10px;">Sitemap</a>
     </div>
   </footer>
+
+
+<script>
+// Select all product grids (in order they appear on the page)
+const productGrids = document.querySelectorAll('.product-grid');
+
+let adultScroll = 0;
+let kidsScroll = 0;
+let womenScroll = 0;
+let computerScroll = 0;
+
+// 1. Adult / Eyeglasses (First Grid)
+function autoSlideAdult() {
+    const grid = productGrids[0];
+    const maxScroll = grid.scrollWidth - grid.parentElement.clientWidth;
+    
+    adultScroll += 320;
+    if (adultScroll > maxScroll) adultScroll = 0;
+    
+    grid.style.transform = `translateX(-${adultScroll}px)`;
+}
+
+// 2. Kid's Eyeglasses (Second Grid)
+function autoSlideKids() {
+    const grid = productGrids[1];
+    const maxScroll = grid.scrollWidth - grid.parentElement.clientWidth;
+    
+    kidsScroll += 320;
+    if (kidsScroll > maxScroll) kidsScroll = 0;
+    
+    grid.style.transform = `translateX(-${kidsScroll}px)`;
+}
+
+// 3. Women's Grid (Third Grid)
+function autoSlideWomen() {
+    const grid = productGrids[2];
+    const maxScroll = grid.scrollWidth - grid.parentElement.clientWidth;
+    
+    womenScroll += 320;
+    if (womenScroll > maxScroll) womenScroll = 0;
+    
+    grid.style.transform = `translateX(-${womenScroll}px)`;
+}
+
+// 4. Computer Glasses (Fourth Grid)
+function autoSlideComputer() {
+    const grid = productGrids[3];
+    const maxScroll = grid.scrollWidth - grid.parentElement.clientWidth;
+    
+    computerScroll += 320;
+    if (computerScroll > maxScroll) computerScroll = 0;
+    
+    grid.style.transform = `translateX(-${computerScroll}px)`;
+}
+
+// Start all auto sliders with slightly different speeds (better visual effect)
+setInterval(autoSlideAdult, 3000);
+setInterval(autoSlideKids, 2800);
+setInterval(autoSlideWomen, 3200);
+setInterval(autoSlideComputer, 2900);
+</script>
 
 </body>
 </html>
