@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpticAura Stores | Find Boutique & Book Eye Test</title>
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style1.css">
+  
+  <!-- Dynamic Scripts -->
+  <script src="js/products-db.js" defer></script>
+  <script src="js/shared.js" defer></script>
+  
+  <style>
+    .stores-container {
+      max-width: 1400px;
+      margin: 40px auto 80px;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: start;
+    }
+    
+    .stores-list-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .store-card {
+      background: #fff;
+      border: 1px solid #f1ece1;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+      display: flex;
+      gap: 25px;
+      transition: all 0.3s ease;
+    }
+    
+    .store-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(140, 122, 91, 0.08);
+      border-color: #d4a373;
+    }
+    
+    .store-image-wrap {
+      flex: 0 0 150px;
+      height: 150px;
+      border-radius: 12px;
+      background: #fdfbf7;
+      border: 1px solid #f6f1e7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #8c7a5b;
+    }
+    
+    .store-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .store-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 8px;
+    }
+    
+    .store-details {
+      font-size: 0.92rem;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    
+    .store-hours {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #8c7a5b;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    
+    /* Appointment Form Column */
+    .appointment-column {
+      background: #fff;
+      border: 1px solid #f1ece1;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.02);
+      position: sticky;
+      top: 100px;
+    }
+    
+    .form-header {
+      margin-bottom: 25px;
+    }
+    
+    .form-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: #111;
+      margin-bottom: 8px;
+    }
+    
+    .form-header p {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.4;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #8c7a5b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #e0dbce;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+      background: #fff;
+    }
+    
+    .form-input:focus,
+    .form-select:focus {
+      border-color: #d4a373;
+      box-shadow: 0 0 0 3px rgba(212,163,115,0.15);
+    }
+    
+    .book-submit-btn {
+      width: 100%;
+      height: 52px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      margin-top: 10px;
+    }
+    
+    .book-submit-btn:hover {
+      background: #d4a373;
+      color: #111;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212,163,115,0.3);
+    }
+    
+    /* Success Receipt Modal/Overlay */
+    .receipt-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    
+    .receipt-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .receipt-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      position: relative;
+      border: 1px solid #f1ece1;
+      text-align: center;
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .receipt-overlay.open .receipt-card {
+      transform: scale(1);
+    }
+    
+    .receipt-success-icon {
+      font-size: 3.5rem;
+      color: #d4a373;
+      margin-bottom: 20px;
+    }
+    
+    .receipt-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 10px;
+    }
+    
+    .receipt-id-badge {
+      display: inline-block;
+      padding: 6px 15px;
+      background: #fdfbf7;
+      border: 1px dashed #d4a373;
+      color: #8c7a5b;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      margin-bottom: 25px;
+      letter-spacing: 0.5px;
+    }
+    
+    .receipt-details-list {
+      text-align: left;
+      background: #fdfbf7;
+      border: 1px solid #f1ece1;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.92rem;
+    }
+    
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #f8f6f0;
+      padding-bottom: 8px;
+    }
+    
+    .receipt-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .receipt-row span {
+      color: #666;
+    }
+    
+    .receipt-row strong {
+      color: #111;
+    }
+    
+    .close-receipt-btn {
+      padding: 12px 28px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s ease;
+    }
+    
+    .close-receipt-btn:hover {
+      background: #d4a373;
+      color: #111;
+    }
+    
+    /* Appointments log visualizer */
+    .active-bookings-list {
+      margin-top: 30px;
+      border-top: 1px solid #f1ece1;
+      padding-top: 25px;
+    }
+    
+    .booking-summary-pill {
+      background: #fdfbf7;
+      border: 1px solid #f1ece1;
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .booking-summary-pill strong {
+      color: #8c7a5b;
+    }
+    
+    /* Header background locator banner */
+    .locator-hero {
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('assets/contact.png') center/cover;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    
+    .locator-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 500;
+    }
+    
+    /* Responsive details */
+    @media (max-width: 991px) {
+      .stores-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .appointment-column {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STORES HERO -->
+  <section class="locator-hero">
+    <div>
+      <h1>OpticAura Flagship Boutiques</h1>
+      <p style="color:#d4a373; letter-spacing:2px; font-size:0.85rem; font-weight:600; text-transform:uppercase; margin-top:8px;">Experience luxury fittings & professional eye test screenings</p>
+    </div>
+  </section>
+
+  <!-- STORES LOCATOR & SCHEDULER INNER -->
+  <div class="stores-container">
+    
+    <!-- Left Column: Boutiques List -->
+    <div class="stores-list-column">
+      
+      <!-- Boutique 1: Punjab Flagship -->
+      <div class="store-card">
+        <div class="store-image-wrap">
+          🏛️
+        </div>
+        <div class="store-info">
+          <div>
+            <h3 class="store-title">Chandigarh Flagship Boutique</h3>
+            <p class="store-details">
+              Sector 17-C, Inner Market Corridor, Chandigarh, PB 160017.<br>
+              <strong>Phone:</strong> +91 98765 43210 &nbsp;|&nbsp; <strong>Email:</strong> chd@opticaura.com
+            </p>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="store-hours">Open Daily: 10:00 AM - 08:30 PM</span>
+            <button onclick="preselectStore('Chandigarh Flagship Boutique')" style="background:transparent; border:none; color:#d4a373; font-weight:700; cursor:pointer; text-decoration:underline; font-size:0.85rem;">Select Store</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Boutique 2: Delhi Premium -->
+      <div class="store-card">
+        <div class="store-image-wrap">
+          👓
+        </div>
+        <div class="store-info">
+          <div>
+            <h3 class="store-title">New Delhi Luxury Lounge</h3>
+            <p class="store-details">
+              M-Block Outer Ring Road, Greater Kailash 1, New Delhi 110048.<br>
+              <strong>Phone:</strong> +91 99999 88888 &nbsp;|&nbsp; <strong>Email:</strong> gk1@opticaura.com
+            </p>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="store-hours">Open Daily: 10:00 AM - 09:00 PM</span>
+            <button onclick="preselectStore('New Delhi Luxury Lounge')" style="background:transparent; border:none; color:#d4a373; font-weight:700; cursor:pointer; text-decoration:underline; font-size:0.85rem;">Select Store</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Boutique 3: Mumbai Elite -->
+      <div class="store-card">
+        <div class="store-image-wrap">
+          ☀️
+        </div>
+        <div class="store-info">
+          <div>
+            <h3 class="store-title">South Mumbai Elite Studio</h3>
+            <p class="store-details">
+              Opposite Regal Cinema, Colaba Causeway, South Mumbai 400001.<br>
+              <strong>Phone:</strong> +91 92222 11111 &nbsp;|&nbsp; <strong>Email:</strong> colaba@opticaura.com
+            </p>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="store-hours">Open Daily: 11:00 AM - 09:00 PM</span>
+            <button onclick="preselectStore('South Mumbai Elite Studio')" style="background:transparent; border:none; color:#d4a373; font-weight:700; cursor:pointer; text-decoration:underline; font-size:0.85rem;">Select Store</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Right Column: Interactive Scheduler Form -->
+    <div class="appointment-column">
+      <div class="form-header">
+        <h2>Schedule Eye Exam</h2>
+        <p>Book a free 20-minute visual precision screening with our certified optometrist at your preferred boutique.</p>
+      </div>
+      
+      <form id="appointmentForm" onsubmit="handleFormSubmit(event)">
+        <!-- Customer Name -->
+        <div class="form-group">
+          <label class="form-label" for="bookingName">Your Full Name</label>
+          <input class="form-input" type="text" id="bookingName" required placeholder="e.g. Rohan Sharma">
+        </div>
+        
+        <!-- Phone Number -->
+        <div class="form-group">
+          <label class="form-label" for="bookingPhone">Phone Number</label>
+          <input class="form-input" type="tel" id="bookingPhone" required placeholder="e.g. +91 98765 43210" pattern="^[0-9+\s\-]{10,15}$">
+        </div>
+        
+        <!-- Store Selection -->
+        <div class="form-group">
+          <label class="form-label" for="bookingStore">Select Boutique Location</label>
+          <select class="form-select" id="bookingStore" required>
+            <option value="" disabled selected>Choose Flagship Boutique</option>
+            <option value="Chandigarh Flagship Boutique">Chandigarh Flagship Boutique</option>
+            <option value="New Delhi Luxury Lounge">New Delhi Luxury Lounge</option>
+            <option value="South Mumbai Elite Studio">South Mumbai Elite Studio</option>
+          </select>
+        </div>
+        
+        <!-- Date Selection -->
+        <div class="form-group">
+          <label class="form-label" for="bookingDate">Preferred Date</label>
+          <input class="form-input" type="date" id="bookingDate" required>
+        </div>
+        
+        <!-- Slot Selection -->
+        <div class="form-group">
+          <label class="form-label" for="bookingSlot">Select Time Slot</label>
+          <select class="form-select" id="bookingSlot" required>
+            <option value="" disabled selected>Choose Time Slot</option>
+            <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM (Optometrist slot A)</option>
+            <option value="12:00 PM - 01:00 PM">12:00 PM - 01:00 PM (Optometrist slot B)</option>
+            <option value="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM (Optometrist slot C)</option>
+            <option value="05:00 PM - 06:00 PM">05:00 PM - 06:00 PM (Optometrist slot D)</option>
+            <option value="06:30 PM - 07:30 PM">06:30 PM - 07:30 PM (Optometrist slot E)</option>
+          </select>
+        </div>
+        
+        <button class="book-submit-btn" type="submit">CONFIRM EYE TEST BOOKING</button>
+      </form>
+      
+      <!-- List Active Bookings -->
+      <div class="active-bookings-list" id="bookingsLogSection" style="display: none;">
+        <h4 class="config-title">My Scheduled Bookings</h4>
+        <div id="bookingsListContainer">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- SUCCESS RECEIPT OVERLAY -->
+  <div class="receipt-overlay" id="successReceiptOverlay" onclick="closeReceiptOverlay()">
+    <div class="receipt-card" onclick="event.stopPropagation()">
+      <div class="receipt-success-icon">✔️</div>
+      <h3 class="receipt-title">Appointment Confirmed!</h3>
+      <span class="receipt-id-badge" id="receiptBookingId">OA-73891</span>
+      
+      <p style="font-size:0.95rem; color:#555; margin-bottom:20px; line-height:1.4;">
+        Your eye precision exam has been scheduled. A verification SMS with calendar invite has been sent. Please arrive 5 minutes early.
+      </p>
+      
+      <div class="receipt-details-list">
+        <div class="receipt-row">
+          <span>Patient Name:</span>
+          <strong id="receiptName">Rohan Sharma</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Store Location:</span>
+          <strong id="receiptStore">Chandigarh Flagship Boutique</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Schedule Date:</span>
+          <strong id="receiptDate">2026-05-24</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Selected Slot:</span>
+          <strong id="receiptSlot">12:00 PM - 01:00 PM</strong>
+        </div>
+      </div>
+      
+      <button class="close-receipt-btn" onclick="closeReceiptOverlay()">DONE & VIEW SCHEDULES</button>
+    </div>
+  </div>
+
+  <!-- BOOKINGS ENGINE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set minimum date selector to today
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('bookingDate').min = today;
+      
+      renderStoredBookings();
+    });
+
+    window.preselectStore = function(storeName) {
+      const select = document.getElementById('bookingStore');
+      if (select) {
+        select.value = storeName;
+        window.scrollTo({
+          top: select.getBoundingClientRect().top + window.scrollY - 120,
+          behavior: 'smooth'
+        });
+        
+        // Visual indicator
+        select.style.borderColor = '#d4a373';
+        setTimeout(() => {
+          select.style.borderColor = '';
+        }, 1500);
+      }
+    };
+
+    window.handleFormSubmit = function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('bookingName').value;
+      const phone = document.getElementById('bookingPhone').value;
+      const store = document.getElementById('bookingStore').value;
+      const date = document.getElementById('bookingDate').value;
+      const slot = document.getElementById('bookingSlot').value;
+      
+      const bookingId = 'OA-' + Math.floor(10000 + Math.random() * 90000);
+      
+      const appointment = {
+        id: bookingId,
+        name,
+        phone,
+        store,
+        date,
+        slot
+      };
+
+      // Fetch existing
+      let bookings = JSON.parse(localStorage.getItem('opticaura_appointments') || '[]');
+      bookings.push(appointment);
+      localStorage.setItem('opticaura_appointments', JSON.stringify(bookings));
+
+      // Populate Receipt details
+      document.getElementById('receiptBookingId').innerText = bookingId;
+      document.getElementById('receiptName').innerText = name;
+      document.getElementById('receiptStore').innerText = store;
+      document.getElementById('receiptDate').innerText = date;
+      document.getElementById('receiptSlot').innerText = slot;
+
+      // Open receipt modal
+      document.getElementById('successReceiptOverlay').classList.add('open');
+
+      // Clear Form
+      document.getElementById('appointmentForm').reset();
+      
+      renderStoredBookings();
+    };
+
+    window.closeReceiptOverlay = function() {
+      document.getElementById('successReceiptOverlay').classList.remove('open');
+    };
+
+    function renderStoredBookings() {
+      const container = document.getElementById('bookingsListContainer');
+      const section = document.getElementById('bookingsLogSection');
+      if (!container) return;
+
+      const bookings = JSON.parse(localStorage.getItem('opticaura_appointments') || '[]');
+
+      if (bookings.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+
+      section.style.display = 'block';
+      let html = '';
+
+      bookings.forEach(book => {
+        html += `
+          <div class="booking-summary-pill">
+            <div>
+              <strong>${book.id}</strong> - ${book.store.split(' ')[0]}<br>
+              <span style="font-size:0.78rem; opacity:0.8;">Date: ${book.date} @ ${book.slot.split(' ')[0]}</span>
+            </div>
+            <button onclick="cancelBooking('${book.id}')" style="background:transparent; border:none; color:#c94a4a; font-weight:bold; cursor:pointer; font-size:0.75rem;">Cancel</button>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    window.cancelBooking = function(id) {
+      if (confirm(`Are you sure you want to cancel appointment ${id}?`)) {
+        let bookings = JSON.parse(localStorage.getItem('opticaura_appointments') || '[]');
+        bookings = bookings.filter(b => b.id !== id);
+        localStorage.setItem('opticaura_appointments', JSON.stringify(bookings));
+        
+        if (window.showToast) {
+          window.showToast(`Appointment ${id} has been cancelled.`);
+        }
+        
+        renderStoredBookings();
+      }
+    };
+  </script>
+</body>
+</html>

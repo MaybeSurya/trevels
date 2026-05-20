@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpticAura Catalog | Discover Premium Eyewear</title>
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style1.css">
+  
+  <!-- Dynamic Scripts -->
+  <script src="js/products-db.js" defer></script>
+  <script src="js/shared.js" defer></script>
+  
+  <style>
+    /* Catalog Layout */
+    .catalog-wrapper {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 5%;
+      display: flex;
+      gap: 40px;
+    }
+    
+    /* Sidebar Filter Column */
+    .filter-sidebar {
+      flex: 0 0 280px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid #f1ece1;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.01);
+      transition: all 0.3s ease;
+    }
+    
+    .filter-section {
+      margin-bottom: 25px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #f8f6f0;
+    }
+    
+    .filter-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .filter-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      color: #444;
+      user-select: none;
+    }
+    
+    .filter-checkbox input {
+      width: 17px;
+      height: 17px;
+      border: 1px solid #8c7a5b;
+      border-radius: 4px;
+      accent-color: #d4a373;
+      cursor: pointer;
+    }
+    
+    /* Main Product List Column */
+    .catalog-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    
+    /* Utility Bar */
+    .catalog-toolbar {
+      background: #fff;
+      padding: 15px 25px;
+      border-radius: 12px;
+      border: 1px solid #f1ece1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .results-indicator h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #111;
+    }
+    
+    .results-indicator span {
+      color: #d4a373;
+      font-weight: 700;
+    }
+    
+    .sort-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    
+    .sort-select {
+      padding: 8px 15px;
+      border: 1px solid #e0dbce;
+      border-radius: 6px;
+      background-color: #fff;
+      font-family: inherit;
+      color: #111;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+    }
+    
+    .sort-select:focus {
+      border-color: #d4a373;
+    }
+    
+    /* Catalog Grid */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 30px;
+    }
+    
+    /* Dynamic Product Cards (Aligned with index.html) */
+    .p-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.02);
+      border: 1px solid #f1ece1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .p-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(140, 122, 91, 0.12);
+      border-color: #d4a373;
+    }
+    
+    .p-card-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #d4a373;
+      color: #111;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 30px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    
+    .p-card-wishlist {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      font-size: 1.1rem;
+      color: #8c7a5b;
+      z-index: 2;
+    }
+    
+    .p-card-wishlist:hover {
+      transform: scale(1.1);
+      color: #c94a4a;
+      background: #fff;
+    }
+    
+    .p-card-wishlist.active {
+      color: #c94a4a !important;
+    }
+    
+    .p-card-img-wrap {
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    
+    .p-card-img-wrap img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      transition: transform 0.4s ease;
+    }
+    
+    .p-card:hover .p-card-img-wrap img {
+      transform: scale(1.05);
+    }
+    
+    .p-card-cat {
+      font-size: 0.72rem;
+      color: #8c7a5b;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    
+    .p-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      height: 2.8rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .p-card-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .p-card-title a:hover {
+      color: #d4a373;
+    }
+    
+    .p-card-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #f8f6f0;
+    }
+    
+    .p-card-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111;
+    }
+    
+    .p-card-btn {
+      padding: 10px 18px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .p-card-btn:hover {
+      background: #d4a373;
+      color: #111;
+    }
+    
+    /* Empty State */
+    .empty-state {
+      background: #fff;
+      border: 1px dashed #e0dbce;
+      border-radius: 16px;
+      padding: 60px 40px;
+      text-align: center;
+    }
+    
+    .empty-state-icon {
+      font-size: 3rem;
+      color: #8c7a5b;
+      margin-bottom: 20px;
+    }
+    
+    .empty-state h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #111;
+    }
+    
+    .empty-state p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    
+    .reset-btn {
+      padding: 10px 24px;
+      background: #d4a373;
+      color: #111;
+      border: none;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .reset-btn:hover {
+      background: #c59262;
+      color: #fff;
+    }
+    
+    .clear-filters-link {
+      font-size: 0.85rem;
+      color: #8c7a5b;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 15px;
+      display: inline-block;
+    }
+    
+    .clear-filters-link:hover {
+      color: #d4a373;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 991px) {
+      .catalog-wrapper {
+        flex-direction: column;
+      }
+      
+      .filter-sidebar {
+        flex: 1;
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MAIN CATALOG INTERFACE -->
+  <div class="catalog-wrapper">
+    
+    <!-- Sidebar Filters -->
+    <aside class="filter-sidebar">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 25px;">
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:1.6rem; font-weight:600; color:#111;">Refine Filters</h3>
+        <span onclick="resetAllFilters()" style="font-size:0.8rem; text-decoration:underline; color:#8c7a5b; cursor:pointer; font-weight:600;">Reset</span>
+      </div>
+      
+      <!-- Category Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title">Category</h4>
+        <div class="filter-group">
+          <label class="filter-checkbox">
+            <input type="checkbox" id="cat-eyeglasses" name="category" value="eyeglasses" onchange="applyFilters()">
+            <span>Eyeglasses</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="cat-sunglasses" name="category" value="sunglasses" onchange="applyFilters()">
+            <span>Sunglasses</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="cat-contacts" name="category" value="contacts" onchange="applyFilters()">
+            <span>Contact Lenses</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Subcategory / Segment Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title">Style & Demographic</h4>
+        <div class="filter-group">
+          <label class="filter-checkbox">
+            <input type="checkbox" id="sub-men" name="subcategory" value="men" onchange="applyFilters()">
+            <span>Men's Style</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="sub-women" name="subcategory" value="women" onchange="applyFilters()">
+            <span>Women's Style</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="sub-kids" name="subcategory" value="kids" onchange="applyFilters()">
+            <span>Kids' Range</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="sub-computer" name="subcategory" value="computer" onchange="applyFilters()">
+            <span>Blue Cut / Computer</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="sub-sports" name="subcategory" value="sports" onchange="applyFilters()">
+            <span>Sports Lenses</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="sub-daily" name="subcategory" value="daily" onchange="applyFilters()">
+            <span>Daily Disposable Lenses</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="sub-monthly" name="subcategory" value="monthly" onchange="applyFilters()">
+            <span>Monthly Disposable Lenses</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" id="sub-colored" name="subcategory" value="colored" onchange="applyFilters()">
+            <span>Colored Correctives</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Price Range Filters -->
+      <div class="filter-section">
+        <h4 class="filter-title">Price Range</h4>
+        <div class="filter-group">
+          <label class="filter-checkbox">
+            <input type="checkbox" name="price" value="under-1000" onchange="applyFilters()">
+            <span>Under ₹1,000</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="price" value="1000-2000" onchange="applyFilters()">
+            <span>₹1,000 - ₹2,000</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="price" value="2000-3000" onchange="applyFilters()">
+            <span>₹2,000 - ₹3,000</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="price" value="3000-4000" onchange="applyFilters()">
+            <span>₹3,000 - ₹4,000</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="price" value="over-4000" onchange="applyFilters()">
+            <span>Over ₹4,000</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Custom Options -->
+      <div class="filter-section">
+        <h4 class="filter-title">Special Tags</h4>
+        <div class="filter-group">
+          <label class="filter-checkbox">
+            <input type="checkbox" id="tag-wishlist" name="tag" value="wishlist" onchange="applyFilters()">
+            <span>My Wishlist ❤️</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Catalog View -->
+    <main class="catalog-content">
+      
+      <!-- Toolbar -->
+      <div class="catalog-toolbar">
+        <div class="results-indicator">
+          <h2>Showing <span id="resultsCount">0</span> premium items</h2>
+          <div id="searchBreadcrumb" style="font-size:0.82rem; color:#8c7a5b; margin-top:4px; font-weight:500;"></div>
+        </div>
+        
+        <div class="sort-control">
+          <span>Sort By:</span>
+          <select class="sort-select" id="sortBySelector" onchange="applyFilters()">
+            <option value="recommended">Best Sellers First</option>
+            <option value="low-to-high">Price: Low to High</option>
+            <option value="high-to-low">Price: High to Low</option>
+            <option value="alphabetical">Product: A to Z</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Active Cards Grid -->
+      <div class="catalog-grid" id="catalogGrid">
+        <!-- Rendered Dynamically via JS -->
+      </div>
+      
+      <!-- Empty State Banner -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-state-icon">🔍</div>
+        <h3>No Matching Frames Found</h3>
+        <p>We couldn't find any products matching your active filters. Try clearing some selections or search terms.</p>
+        <button class="reset-btn" onclick="resetAllFilters()">Clear All Filters</button>
+      </div>
+      
+    </main>
+  </div>
+
+  <!-- DYNAMIC JS FILTER SYSTEM -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Small timeout to allow PRODUCTS to load and window functions to register
+      setTimeout(() => {
+        initializeFiltersFromUrl();
+        applyFilters();
+      }, 100);
+
+      // Listen for custom wishlist updates to sync icons instantly
+      document.addEventListener('wishlistChanged', (e) => {
+        const { productId, inWishlist } = e.detail;
+        
+        // Sync active class on card hearts
+        const hearts = document.querySelectorAll(`.p-card-wishlist[data-id="${productId}"]`);
+        hearts.forEach(heart => {
+          if (inWishlist) {
+            heart.classList.add('active');
+            heart.innerText = '❤️';
+          } else {
+            heart.classList.remove('active');
+            heart.innerText = '♡';
+          }
+        });
+
+        // If currently viewing wishlist, we need to re-filter immediately to remove unhearted item
+        const wishlistCheckbox = document.getElementById('tag-wishlist');
+        if (wishlistCheckbox && wishlistCheckbox.checked) {
+          applyFilters();
+        }
+      });
+    });
+
+    // 1. Read parameters on load (e.g. ?category=sunglasses&sub=men&search=polarized)
+    function initializeFiltersFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      
+      // Category
+      const cat = params.get('category');
+      if (cat) {
+        const checkbox = document.getElementById(`cat-${cat}`);
+        if (checkbox) checkbox.checked = true;
+      }
+      
+      // Subcategory
+      const sub = params.get('sub');
+      if (sub) {
+        const checkbox = document.getElementById(`sub-${sub}`);
+        if (checkbox) checkbox.checked = true;
+      }
+      
+      // Wishlist view
+      const wishlist = params.get('wishlist');
+      if (wishlist === 'true') {
+        const checkbox = document.getElementById('tag-wishlist');
+        if (checkbox) checkbox.checked = true;
+      }
+
+      // Search term (written to global window state to keep persistent)
+      const search = params.get('search');
+      if (search) {
+        window.activeSearchTerm = search.toLowerCase();
+        
+        // Also inject into the shared navigation header search input if exists
+        const headerSearchInput = document.getElementById('navSearchInput');
+        if (headerSearchInput) {
+          headerSearchInput.value = search;
+        }
+      }
+    }
+
+    // 2. Primary Filter, Search, Sort & Render Loop
+    function applyFilters() {
+      if (typeof PRODUCTS === 'undefined') return;
+
+      const grid = document.getElementById('catalogGrid');
+      const emptyState = document.getElementById('emptyState');
+      const resultsCountEl = document.getElementById('resultsCount');
+      const breadcrumb = document.getElementById('searchBreadcrumb');
+
+      // A. Gather Active Checkbox States
+      const selectedCats = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(el => el.value);
+      const selectedSubs = Array.from(document.querySelectorAll('input[name="subcategory"]:checked')).map(el => el.value);
+      const selectedPriceRanges = Array.from(document.querySelectorAll('input[name="price"]:checked')).map(el => el.value);
+      const isWishlistOnly = document.getElementById('tag-wishlist').checked;
+      const sortBy = document.getElementById('sortBySelector').value;
+      const searchTerm = window.activeSearchTerm || '';
+
+      // B. Filter products array
+      let list = Object.values(PRODUCTS);
+
+      // Apply Search filter
+      if (searchTerm) {
+        list = list.filter(item => 
+          item.name.toLowerCase().includes(searchTerm) || 
+          (item.desc && item.desc.toLowerCase().includes(searchTerm)) || 
+          item.category.toLowerCase().includes(searchTerm)
+        );
+        breadcrumb.innerHTML = `Active Search: "<strong>${searchTerm}</strong>"`;
+      } else {
+        breadcrumb.innerHTML = ``;
+      }
+
+      // Apply Category filters
+      if (selectedCats.length > 0) {
+        list = list.filter(item => selectedCats.includes(item.category));
+      }
+
+      // Apply Subcategory filters
+      if (selectedSubs.length > 0) {
+        list = list.filter(item => selectedSubs.includes(item.subcategory));
+      }
+
+      // Apply Price Range filters
+      if (selectedPriceRanges.length > 0) {
+        list = list.filter(item => {
+          return selectedPriceRanges.some(range => {
+            if (range === 'under-1000') return item.price < 1000;
+            if (range === '1000-2000') return item.price >= 1000 && item.price <= 2000;
+            if (range === '2000-3000') return item.price >= 2000 && item.price <= 3000;
+            if (range === '3000-4000') return item.price >= 3000 && item.price <= 4000;
+            if (range === 'over-4000') return item.price > 4000;
+            return false;
+          });
+        });
+      }
+
+      // Apply Wishlist Only filter
+      if (isWishlistOnly && window.getWishlist) {
+        const wishlistIds = window.getWishlist();
+        list = list.filter(item => wishlistIds.includes(item.id));
+      }
+
+      // C. Sort active list
+      if (sortBy === 'low-to-high') {
+        list.sort((a, b) => a.price - b.price);
+      } else if (sortBy === 'high-to-low') {
+        list.sort((a, b) => b.price - a.price);
+      } else if (sortBy === 'alphabetical') {
+        list.sort((a, b) => a.name.localeCompare(b.name));
+      } else {
+        // default: Recommended/Best Match
+        // keeps database order which has default categorization
+      }
+
+      // D. Update counters & views
+      resultsCountEl.innerText = list.length;
+
+      if (list.length === 0) {
+        grid.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      grid.style.display = 'grid';
+
+      // E. Render cards
+      let html = '';
+      list.forEach(prod => {
+        // Tags
+        const isHot = prod.price > 3000 || prod.id.includes('product13') || prod.id.includes('sg12');
+        const badgeHtml = isHot ? '<span class="p-card-badge">Trendy</span>' : '';
+        
+        // Wishlist
+        const inWishlistClass = window.isInWishlist && window.isInWishlist(prod.id) ? 'active' : '';
+        const heartChar = inWishlistClass ? '❤️' : '♡';
+
+        html += `
+          <div class="p-card">
+            ${badgeHtml}
+            <div class="p-card-wishlist ${inWishlistClass}" data-id="${prod.id}" onclick="event.stopPropagation(); handleWishlistClick('${prod.id}', this)">
+              ${heartChar}
+            </div>
+            
+            <div class="p-card-img-wrap" onclick="location.href='product.html?id=${prod.id}'" style="cursor:pointer;">
+              <img src="${prod.image}" alt="${prod.name}">
+            </div>
+            
+            <div>
+              <div class="p-card-cat">${prod.category}</div>
+              <h3 class="p-card-title"><a href="product.html?id=${prod.id}">${prod.name}</a></h3>
+            </div>
+            
+            <div class="p-card-price-row">
+              <div class="p-card-price">₹${prod.price.toLocaleString()}</div>
+              <button class="p-card-btn" onclick="window.addToCart('${prod.id}')">ADD TO BAG</button>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    // 3. Reset helper
+    function resetAllFilters() {
+      // Clear URL params visually without page reload if possible, otherwise reload empty
+      if (window.location.search) {
+        window.history.pushState({}, document.title, window.location.pathname);
+      }
+      
+      window.activeSearchTerm = '';
+      
+      // Uncheck checkboxes
+      document.querySelectorAll('.filter-sidebar input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+
+      // Clear header input
+      const headerSearchInput = document.getElementById('navSearchInput');
+      if (headerSearchInput) {
+        headerSearchInput.value = '';
+      }
+
+      applyFilters();
+    }
+
+    function handleWishlistClick(id, element) {
+      if (window.toggleWishlist) {
+        window.toggleWishlist(id);
+      }
+    }
+  </script>
+</body>
+</html>

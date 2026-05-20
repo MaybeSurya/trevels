@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpticAura | Premium Eyewear Precision</title>
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style1.css">
+  
+  <!-- Dynamic Scripts -->
+  <script src="js/products-db.js" defer></script>
+  <script src="js/shared.js" defer></script>
+  
+  <style>
+    /* Breadcrumbs Navigation */
+    .breadcrumbs {
+      max-width: 1400px;
+      margin: 30px auto 0;
+      padding: 0 5%;
+      font-size: 0.85rem;
+      color: #8c7a5b;
+      font-weight: 500;
+    }
+    
+    .breadcrumbs a {
+      color: #111;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .breadcrumbs a:hover {
+      color: #d4a373;
+    }
+    
+    /* Product Detail Segment */
+    .product-details-container {
+      max-width: 1400px;
+      margin: 30px auto 80px;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: start;
+    }
+    
+    /* Left Gallery Column */
+    .gallery-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .main-image-wrap {
+      background: #fff;
+      border: 1px solid #f1ece1;
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 480px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.01);
+    }
+    
+    .main-image-wrap img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .main-image-wrap:hover img {
+      transform: scale(1.15); /* Premium hover-zoom magnifying effect */
+    }
+    
+    .gallery-thumbnails {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    
+    .thumbnail-btn {
+      width: 80px;
+      height: 80px;
+      border: 1px solid #e0dbce;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .thumbnail-btn.active,
+    .thumbnail-btn:hover {
+      border-color: #d4a373;
+      box-shadow: 0 4px 12px rgba(212,163,115,0.2);
+    }
+    
+    .thumbnail-btn img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    
+    /* Right Details Info Column */
+    .details-column {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    
+    .product-cat-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #8c7a5b;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    
+    .product-name-large {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 500;
+      color: #111;
+      line-height: 1.15;
+    }
+    
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    
+    .rating-stars {
+      color: #d4a373;
+      font-size: 1.05rem;
+    }
+    
+    .product-price-large {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #111;
+      margin: 5px 0;
+    }
+    
+    .product-desc-text {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #444;
+    }
+    
+    /* Options Section */
+    .specs-config-section {
+      background: #fdfbf7;
+      border: 1px solid #f1ece1;
+      border-radius: 12px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .config-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #8c7a5b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    
+    .config-options-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .config-pill {
+      padding: 10px 20px;
+      border: 1px solid #e0dbce;
+      background: #fff;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #444;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    
+    .config-pill.active,
+    .config-pill:hover {
+      border-color: #d4a373;
+      background: #fdf8ef;
+      color: #8c7a5b;
+    }
+    
+    /* Quantity & Buy controls */
+    .action-triggers-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      border: 1px solid #e0dbce;
+      border-radius: 6px;
+      background: #fff;
+      height: 52px;
+      overflow: hidden;
+    }
+    
+    .qty-selector button {
+      width: 48px;
+      height: 100%;
+      border: none;
+      background: transparent;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #555;
+      transition: background 0.2s ease;
+    }
+    
+    .qty-selector button:hover {
+      background: #fdfbf7;
+    }
+    
+    .qty-selector input {
+      width: 45px;
+      height: 100%;
+      border: none;
+      border-left: 1px solid #e0dbce;
+      border-right: 1px solid #e0dbce;
+      text-align: center;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111;
+      outline: none;
+    }
+    
+    /* Remove input spinner arrows */
+    .qty-selector input::-webkit-outer-spin-button,
+    .qty-selector input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    .add-to-cart-btn-large {
+      flex: 1;
+      min-width: 200px;
+      height: 52px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .add-to-cart-btn-large:hover {
+      background: #d4a373;
+      color: #111;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212,163,115,0.3);
+    }
+    
+    .wishlist-btn-round {
+      width: 52px;
+      height: 52px;
+      border-radius: 6px;
+      border: 1px solid #e0dbce;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: #8c7a5b;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .wishlist-btn-round:hover {
+      border-color: #c94a4a;
+      color: #c94a4a;
+      transform: scale(1.05);
+    }
+    
+    .wishlist-btn-round.active {
+      color: #c94a4a !important;
+    }
+    
+    /* Checklist Features */
+    .feature-checklist {
+      list-style: none;
+      margin-top: 15px;
+    }
+    
+    .feature-checklist li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      color: #444;
+      font-weight: 500;
+    }
+    
+    .feature-checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #d4a373;
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+    
+    /* Recommendations slider section */
+    .recommendations-section {
+      background: #fdfbf7;
+      padding: 80px 5%;
+      border-top: 1px solid #f1ece1;
+    }
+    
+    .recommendations-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 45px;
+      position: relative;
+      color: #111;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      padding-bottom: 12px;
+    }
+    
+    .recommendations-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #d4a373;
+    }
+    
+    .reco-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    /* Dynamic Product Cards */
+    .p-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.02);
+      border: 1px solid #f1ece1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .p-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(140, 122, 91, 0.12);
+      border-color: #d4a373;
+    }
+    
+    .p-card-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #d4a373;
+      color: #111;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 30px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    
+    .p-card-wishlist {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      font-size: 1.1rem;
+      color: #8c7a5b;
+      z-index: 2;
+    }
+    
+    .p-card-wishlist:hover {
+      transform: scale(1.1);
+      color: #c94a4a;
+      background: #fff;
+    }
+    
+    .p-card-wishlist.active {
+      color: #c94a4a !important;
+    }
+    
+    .p-card-img-wrap {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    
+    .p-card-img-wrap img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      transition: transform 0.4s ease;
+    }
+    
+    .p-card:hover .p-card-img-wrap img {
+      transform: scale(1.05);
+    }
+    
+    .p-card-cat {
+      font-size: 0.72rem;
+      color: #8c7a5b;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    
+    .p-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      height: 2.8rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .p-card-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .p-card-title a:hover {
+      color: #d4a373;
+    }
+    
+    .p-card-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #f8f6f0;
+    }
+    
+    .p-card-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111;
+    }
+    
+    .p-card-btn {
+      padding: 10px 18px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .p-card-btn:hover {
+      background: #d4a373;
+      color: #111;
+    }
+    
+    /* Error state inside product details */
+    .not-found-card {
+      max-width: 600px;
+      margin: 100px auto;
+      background: #fff;
+      border: 1px solid #f1ece1;
+      padding: 50px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    
+    /* Responsive details */
+    @media (max-width: 991px) {
+      .product-details-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .main-image-wrap {
+        height: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BREADCRUMBS -->
+  <div class="breadcrumbs">
+    <a href="index.html">Home</a> &nbsp;/&nbsp; 
+    <a href="shop.html">Shop</a> &nbsp;/&nbsp; 
+    <span id="breadcrumbCategory" style="text-transform: capitalize; color: #8c7a5b;">Eyewear</span> &nbsp;/&nbsp;
+    <span id="breadcrumbName" style="color: #d4a373; font-weight: 600;">Product Detail</span>
+  </div>
+
+  <!-- MAIN DYNAMIC PRODUCT DETAIL WRAPPER -->
+  <main class="product-details-container" id="productDetailSection">
+    
+    <!-- Left Column: Gallery thumbnails & Magnifying Image -->
+    <div class="gallery-column">
+      <div class="main-image-wrap">
+        <img id="detailMainImg" src="" alt="Premium Eyewear">
+      </div>
+      
+      <div class="gallery-thumbnails" id="thumbnailBar">
+        <!-- Generated Dynamically -->
+      </div>
+    </div>
+    
+    <!-- Right Column: Specs Selection, Pricing, Features checklist -->
+    <div class="details-column">
+      <div>
+        <span class="product-cat-tag" id="detailCategory">EYEGLASSES</span>
+        <h1 class="product-name-large" id="detailName">Premium Designer Frame</h1>
+        
+        <div class="rating-row" style="margin-top: 10px;">
+          <span class="rating-stars">★★★★★</span>
+          <span id="detailRatingText">4.8 / 5.0 (34 buyer reviews)</span>
+        </div>
+      </div>
+      
+      <div class="product-price-large" id="detailPrice">₹0</div>
+      
+      <p class="product-desc-text" id="detailDesc">Loading exquisite details...</p>
+      
+      <!-- Specifications Configuration (Varying on Category) -->
+      <div class="specs-config-section" id="optionsBox">
+        <!-- Rendered based on product category -->
+      </div>
+      
+      <!-- Add-to-cart controls -->
+      <div class="action-triggers-row">
+        <div class="qty-selector">
+          <button onclick="adjustQty(-1)">-</button>
+          <input type="number" id="detailQty" value="1" min="1">
+          <button onclick="adjustQty(1)">+</button>
+        </div>
+        
+        <button class="add-to-cart-btn-large" id="detailAddBtn" onclick="handleAddToBag()">ADD TO SHOPPING BAG</button>
+        
+        <div class="wishlist-btn-round" id="detailWishBtn" onclick="handleWishlistToggle()" title="Add to Wishlist">
+          ♡
+        </div>
+      </div>
+      
+      <!-- List Features checklist -->
+      <div style="border-top: 1px solid #f1ece1; padding-top: 25px; margin-top: 15px;">
+        <h4 class="config-title">Core Product Features</h4>
+        <ul class="feature-checklist" id="detailFeaturesList">
+          <!-- Dynamic specs list -->
+        </ul>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- Not Found Container -->
+  <div class="not-found-card" id="notFoundCard" style="display: none;">
+    <h2 style="font-family:'Cormorant Garamond', serif; font-size: 2.2rem; color: #111; margin-bottom: 15px;">Product Not Found</h2>
+    <p style="color: #666; margin-bottom: 25px;">We couldn't locate the premium frame you are searching for. It may have been archived or out of stock.</p>
+    <a href="shop.html" class="cta-btn">GO BACK TO SHOP</a>
+  </div>
+
+  <!-- RECOMMENDATIONS BAR -->
+  <section class="recommendations-section" id="recommendationsSection">
+    <h3 class="recommendations-title">You May Also Like</h3>
+    <div class="reco-grid" id="recommendationsGrid">
+      <!-- Populated Dynamically with Same-Category items -->
+    </div>
+  </section>
+
+  <!-- DYNAMIC RENDER LOGIC -->
+  <script>
+    let activeProduct = null;
+    let activeProductId = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Small timeout to guarantee PRODUCTS is parsed globally
+      setTimeout(loadProductDetail, 100);
+
+      // Listen for wishlist state shifts elsewhere (like side-cart or top nav)
+      document.addEventListener('wishlistChanged', (e) => {
+        const { productId, inWishlist } = e.detail;
+        if (productId === activeProductId) {
+          syncWishlistButton(inWishlist);
+        }
+        
+        // Update recommended cards wishlist icons if they match
+        const hearts = document.querySelectorAll(`.p-card-wishlist[data-id="${productId}"]`);
+        hearts.forEach(heart => {
+          if (inWishlist) {
+            heart.classList.add('active');
+            heart.innerText = '❤️';
+          } else {
+            heart.classList.remove('active');
+            heart.innerText = '♡';
+          }
+        });
+      });
+    });
+
+    // 1. Fetch parameters, lookup DB, render values
+    function loadProductDetail() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      
+      if (!id || typeof PRODUCTS === 'undefined' || !PRODUCTS[id]) {
+        showNotFound();
+        return;
+      }
+      
+      activeProductId = id;
+      activeProduct = PRODUCTS[id];
+
+      // Update breadcrumbs
+      document.getElementById('breadcrumbCategory').innerText = activeProduct.category;
+      document.getElementById('breadcrumbCategory').href = `shop.html?category=${activeProduct.category}`;
+      document.getElementById('breadcrumbName').innerText = activeProduct.name;
+      document.title = `${activeProduct.name} | OpticAura Premium`;
+
+      // Update Image
+      document.getElementById('detailMainImg').src = activeProduct.image;
+      document.getElementById('detailMainImg').alt = activeProduct.name;
+
+      // Update Thumbnails (Alternate perspective placeholders using pre-existing image assets)
+      renderThumbnails();
+
+      // Update Meta
+      document.getElementById('detailCategory').innerText = activeProduct.category;
+      document.getElementById('detailName').innerText = activeProduct.name;
+      document.getElementById('detailPrice').innerText = `₹${activeProduct.price.toLocaleString()}`;
+      document.getElementById('detailDesc').innerText = activeProduct.desc || 'Crafted with premium durable acetate material, hand-aligned double metal bridge temples, and high-clarity prescription ready lenses.';
+
+      // Ratings mock details to feel premium and unique per product
+      const reviewCount = Math.floor(Math.random() * 45) + 12;
+      const reviewScore = (4.5 + Math.random() * 0.5).toFixed(1);
+      document.getElementById('detailRatingText').innerText = `${reviewScore} / 5.0 (${reviewCount} verified reviews)`;
+
+      // Render category specific specs selection options
+      renderSpecsOptions();
+
+      // Render Features Checklist
+      renderChecklist();
+
+      // Sync Wishlist Button State
+      if (window.isInWishlist) {
+        syncWishlistButton(window.isInWishlist(activeProductId));
+      }
+
+      // Render Related Recommendations
+      renderRelatedRecommendations();
+    }
+
+    // Thumbnails rendering
+    function renderThumbnails() {
+      const bar = document.getElementById('thumbnailBar');
+      if (!bar) return;
+
+      // Make 3 thumbnails: 1 is main image, 2 and 3 can be pre-existing image assets in category
+      let alternateImages = [activeProduct.image];
+      
+      if (activeProduct.category === 'eyeglasses') {
+        alternateImages.push('assets/eyeglasses_img.png', 'assets/eyeglasses_img2.png');
+      } else if (activeProduct.category === 'sunglasses') {
+        alternateImages.push('assets/sg1.png', 'assets/sg2.png');
+      } else {
+        alternateImages.push('assets/cont2.png', 'assets/cont3.png');
+      }
+
+      let html = '';
+      alternateImages.forEach((img, idx) => {
+        const activeClass = idx === 0 ? 'active' : '';
+        html += `
+          <button class="thumbnail-btn ${activeClass}" onclick="switchMainImage('${img}', this)">
+            <img src="${img}" alt="Angle ${idx + 1}">
+          </button>
+        `;
+      });
+      bar.innerHTML = html;
+    }
+
+    window.switchMainImage = function(src, btn) {
+      document.getElementById('detailMainImg').src = src;
+      
+      // Update active thumbnail borders
+      document.querySelectorAll('.thumbnail-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    };
+
+    // Category options builder
+    function renderSpecsOptions() {
+      const box = document.getElementById('optionsBox');
+      if (!box) return;
+
+      let html = '';
+
+      if (activeProduct.category === 'eyeglasses' || activeProduct.category === 'sunglasses') {
+        html = `
+          <div>
+            <div class="config-title">1. Select Frame Fitting Size</div>
+            <div class="config-options-row">
+              <span class="config-pill active" onclick="selectConfigOption(this)">Standard Fit</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">Narrow Fit</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">Wide Fit</span>
+            </div>
+          </div>
+          <div style="margin-top: 10px;">
+            <div class="config-title">2. Select Lens Upgrade</div>
+            <div class="config-options-row">
+              <span class="config-pill active" onclick="selectConfigOption(this)">Zero Power Clear Lenses</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">Blue Cut Screen Protection (+₹999)</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">Smart Photochromic Adaptable (+₹1,499)</span>
+            </div>
+          </div>
+        `;
+      } else {
+        // Contact Lenses specs power selection
+        html = `
+          <div>
+            <div class="config-title">1. Corrective Sphere Power (S.P.H)</div>
+            <div class="config-options-row" style="max-height: 120px; overflow-y: auto; padding: 5px;">
+              <span class="config-pill active" onclick="selectConfigOption(this)">Zero Power (0.00)</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">-1.00</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">-2.00</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">-3.00</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">-4.00</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">-5.00</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">-6.00</span>
+            </div>
+          </div>
+          <div style="margin-top: 10px;">
+            <div class="config-title">2. Supply Packaging Quantity</div>
+            <div class="config-options-row">
+              <span class="config-pill active" onclick="selectConfigOption(this)">1 Box (30 Lenses)</span>
+              <span class="config-pill" onclick="selectConfigOption(this)">2 Boxes (60 Lenses - Save 5%)</span>
+            </div>
+          </div>
+        `;
+      }
+      box.innerHTML = html;
+    }
+
+    window.selectConfigOption = function(pill) {
+      // Toggle active inside sibling tags
+      const row = pill.parentNode;
+      row.querySelectorAll('.config-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    };
+
+    // Checklist
+    function renderChecklist() {
+      const listContainer = document.getElementById('detailFeaturesList');
+      if (!listContainer) return;
+
+      const features = activeProduct.features || [
+        "Lightweight premium construction frame",
+        "Hand-polished scratch-resistant coatings",
+        "Hypoallergenic comfort adjustable nose pads",
+        "Anti-reflective coatings included free"
+      ];
+
+      listContainer.innerHTML = features.map(feat => `<li>${feat}</li>`).join('');
+    }
+
+    // Wishlist syncing
+    function syncWishlistButton(inWishlist) {
+      const btn = document.getElementById('detailWishBtn');
+      if (!btn) return;
+
+      if (inWishlist) {
+        btn.classList.add('active');
+        btn.innerHTML = '❤️';
+      } else {
+        btn.classList.remove('active');
+        btn.innerHTML = '♡';
+      }
+    }
+
+    // Adjust quantities
+    window.adjustQty = function(delta) {
+      const qtyEl = document.getElementById('detailQty');
+      let val = parseInt(qtyEl.value, 10);
+      val = Math.max(1, val + delta);
+      qtyEl.value = val;
+    };
+
+    // Add To Bag Trigger
+    window.handleAddToBag = function() {
+      if (!activeProductId) return;
+      const qty = parseInt(document.getElementById('detailQty').value, 10) || 1;
+      
+      if (window.addToCart) {
+        window.addToCart(activeProductId, qty);
+      }
+    };
+
+    // Wishlist Toggle
+    window.handleWishlistToggle = function() {
+      if (!activeProductId) return;
+      if (window.toggleWishlist) {
+        window.toggleWishlist(activeProductId);
+      }
+    };
+
+    // Related Products calculation
+    function renderRelatedRecommendations() {
+      const grid = document.getElementById('recommendationsGrid');
+      if (!grid || typeof PRODUCTS === 'undefined') return;
+
+      // Filter other products in the same category
+      let list = Object.values(PRODUCTS).filter(item => 
+        item.category === activeProduct.category && item.id !== activeProductId
+      );
+
+      // Randomize selection slightly and take first 4 items
+      list.sort(() => 0.5 - Math.random());
+      const selected = list.slice(0, 4);
+
+      if (selected.length === 0) {
+        document.getElementById('recommendationsSection').style.display = 'none';
+        return;
+      }
+
+      let html = '';
+      selected.forEach(prod => {
+        const isHot = prod.price > 3500;
+        const badgeHtml = isHot ? '<span class="p-card-badge">Top Pick</span>' : '';
+        const inWishlistClass = window.isInWishlist && window.isInWishlist(prod.id) ? 'active' : '';
+        const heartChar = inWishlistClass ? '❤️' : '♡';
+
+        html += `
+          <div class="p-card">
+            ${badgeHtml}
+            <div class="p-card-wishlist ${inWishlistClass}" data-id="${prod.id}" onclick="event.stopPropagation(); handleWishlistClick('${prod.id}', this)">
+              ${heartChar}
+            </div>
+            
+            <div class="p-card-img-wrap" onclick="location.href='product.html?id=${prod.id}'" style="cursor:pointer;">
+              <img src="${prod.image}" alt="${prod.name}">
+            </div>
+            
+            <div>
+              <div class="p-card-cat">${prod.category}</div>
+              <h3 class="p-card-title"><a href="product.html?id=${prod.id}">${prod.name}</a></h3>
+            </div>
+            
+            <div class="p-card-price-row">
+              <div class="p-card-price">₹${prod.price.toLocaleString()}</div>
+              <button class="p-card-btn" onclick="window.addToCart('${prod.id}')">ADD TO BAG</button>
+            </div>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    }
+
+    function handleWishlistClick(id, element) {
+      if (window.toggleWishlist) {
+        window.toggleWishlist(id);
+      }
+    }
+
+    function showNotFound() {
+      document.getElementById('productDetailSection').style.display = 'none';
+      document.getElementById('recommendationsSection').style.display = 'none';
+      document.getElementById('notFoundCard').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpticAura Technology | Advanced Optical Lenses</title>
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style1.css">
+  
+  <!-- Dynamic Scripts -->
+  <script src="js/products-db.js" defer></script>
+  <script src="js/shared.js" defer></script>
+  
+  <style>
+    /* Tech Hero Section */
+    .tech-hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/contact.png') center/cover;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 0 5%;
+    }
+    
+    .tech-hero-content {
+      max-width: 800px;
+    }
+    
+    .tech-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 15px;
+    }
+    
+    .tech-hero p {
+      font-size: 1.1rem;
+      color: #d4a373;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    
+    /* Technology Showcase Section */
+    .tech-grid {
+      max-width: 1400px;
+      margin: 80px auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+    
+    .tech-card {
+      background: #fff;
+      border: 1px solid #f1ece1;
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.01);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tech-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #d4a373;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    
+    .tech-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(140, 122, 91, 0.1);
+      border-color: #d4a373;
+    }
+    
+    .tech-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .tech-icon {
+      font-size: 3rem;
+      margin-bottom: 25px;
+      display: inline-block;
+    }
+    
+    .tech-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 12px;
+    }
+    
+    .tech-card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    
+    .tech-specs-list {
+      list-style: none;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .tech-specs-list li {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .tech-specs-list li::before {
+      content: '⚡';
+      color: #d4a373;
+      font-size: 0.8rem;
+    }
+    
+    .tech-btn {
+      display: block;
+      width: 100%;
+      padding: 12px 20px;
+      border: 1px solid #111;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #111;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+    
+    .tech-card:hover .tech-btn {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+    
+    .tech-btn:hover {
+      background: #d4a373 !important;
+      color: #111 !important;
+      border-color: #d4a373 !important;
+    }
+    
+    /* Interactive Lens Demo Slider Container */
+    .demo-section {
+      background: #fdfbf7;
+      padding: 90px 5%;
+      border-top: 1px solid #f1ece1;
+      border-bottom: 1px solid #f1ece1;
+    }
+    
+    .demo-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .demo-title-wrapper {
+      margin-bottom: 45px;
+    }
+    
+    /* Glassmorphic split lens screen compare element */
+    .compare-element {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      border: 1px solid #f1ece1;
+    }
+    
+    .compare-bg {
+      width: 100%;
+      height: 100%;
+      background: url('assets/eyeglasses_background_img.png') center/cover;
+    }
+    
+    .compare-lens-shield {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: contrast(1.1) brightness(1.05) saturate(1.15) blur(0px);
+      border-left: 2px dashed #d4a373;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: width 0.1s ease;
+    }
+    
+    .compare-label {
+      position: absolute;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 30px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+    
+    .label-left {
+      top: 20px;
+      left: 20px;
+      background: #111;
+      color: #d4a373;
+    }
+    
+    .label-right {
+      top: 20px;
+      right: 20px;
+      background: #d4a373;
+      color: #111;
+    }
+    
+    .compare-slider-control {
+      width: 100%;
+      margin-top: 20px;
+      accent-color: #d4a373;
+      cursor: pointer;
+    }
+    
+    /* Sizing adjustments */
+    @media (max-width: 768px) {
+      .compare-element {
+        height: 300px;
+      }
+      .tech-hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TECH HERO -->
+  <section class="tech-hero">
+    <div class="tech-hero-content">
+      <h1>Vision Precision & Lens Engineering</h1>
+      <p>Premium customized lenses optimized for modern digital screens, active lifestyles, and severe prescription needs.</p>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY CARDS SHOWCASE -->
+  <section class="tech-grid">
+    
+    <!-- Tech 1: High Power Lenses -->
+    <div class="tech-card">
+      <div>
+        <span class="tech-icon">👁️</span>
+        <h3>High Prescription Index Lenses</h3>
+        <p>Expertly optimized thin, compressed lenses suited for high power corrections (-8.00 and above). Reduces lens weight and edge thickness for aesthetic comfort.</p>
+        
+        <ul class="tech-specs-list">
+          <li>1.67 / 1.74 High Index Refraction</li>
+          <li>Aspheric Curve - Reduces Eye distortion</li>
+          <li>Super-hydrophobic smudge resistance</li>
+        </ul>
+      </div>
+      
+      <a class="tech-btn" href="shop.html?category=eyeglasses">Shop Prescription Frames</a>
+    </div>
+    
+    <!-- Tech 2: Cylinder Power Lenses -->
+    <div class="tech-card">
+      <div>
+        <span class="tech-icon">🔵</span>
+        <h3>Astigmatism Cylindrical Precision</h3>
+        <p>Specially calibrated lenses offering crystal-clear peripheral alignment to correct astigmatism focus. Built to prevent blurring and eye fatigue.</p>
+        
+        <ul class="tech-specs-list">
+          <li>Rotational stabilization tech</li>
+          <li>Wide field of vision correction</li>
+          <li>Custom computer mapping lens cuts</li>
+        </ul>
+      </div>
+      
+      <a class="tech-btn" href="shop.html?category=eyeglasses">Shop Astigmatism Specs</a>
+    </div>
+    
+    <!-- Tech 3: Photochromic Adaptable Lenses -->
+    <div class="tech-card">
+      <div>
+        <span class="tech-icon">🌞</span>
+        <h3>Smart Adaptive Photochromics</h3>
+        <p>Intelligent, fast-acting lenses that remain crystal clear indoors and transition to dark tinted sunglasses when exposed to outdoor UV sunlight.</p>
+        
+        <ul class="tech-specs-list">
+          <li>Auto Darkening within 30 seconds</li>
+          <li>Full UV400 Sun Protection</li>
+          <li>Perfect hybrid indoor-outdoor wear</li>
+        </ul>
+      </div>
+      
+      <a class="tech-btn" href="shop.html?category=sunglasses&sub=icon">Shop Photochromic Lenses</a>
+    </div>
+    
+    <!-- Tech 4: Blue Cut + UV Protection -->
+    <div class="tech-card">
+      <div>
+        <span class="tech-icon">💻</span>
+        <h3>Blue Cut Shield Screen Lenses</h3>
+        <p>Premium digital screen filters that deflect high-energy blue violet rays emitted by laptops, phones, and TVs. Relieves digital screen fatigue instantly.</p>
+        
+        <ul class="tech-specs-list">
+          <li>Filters 95% harmful digital rays</li>
+          <li>Improves circadian sleep cycles</li>
+          <li>Includes anti-reflective glaze</li>
+        </ul>
+      </div>
+      
+      <a class="tech-btn" href="shop.html?category=eyeglasses&sub=computer">Shop Computer Lenses</a>
+    </div>
+    
+  </section>
+
+  <!-- INTERACTIVE LENS DEMO COMPARISON SLIDER -->
+  <section class="demo-section">
+    <div class="demo-container">
+      <div class="demo-title-wrapper">
+        <span style="color:#d4a373; font-weight:600; font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; display:block; margin-bottom:10px;">Visualizer Simulator</span>
+        <h2 style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:600; color:#111;">Interactive Optical Coating Simulator</h2>
+        <p style="color:#666; margin-top:8px; font-size:0.95rem;">Drag the slider below to simulate screen glare relief and enhanced chromatic contrast under our premium Blue Cut & UV protection coatings.</p>
+      </div>
+      
+      <!-- Glare simulator visual box -->
+      <div class="compare-element">
+        <span class="compare-label label-left">Standard Clear Lens (Glare)</span>
+        <span class="compare-label label-right">Blue-Cut Deflector Glaze</span>
+        
+        <div class="compare-bg" id="compareBg"></div>
+        <div class="compare-lens-shield" id="compareShield">
+          <!-- Glassmorphic filter simulator styling -->
+          <div style="width:100%; height:100%; background:rgba(212,163,115,0.05); filter: contrast(1.15) saturate(1.1); box-shadow: inset 0 0 100px rgba(0,48,135,0.08);"></div>
+        </div>
+      </div>
+      
+      <input type="range" class="compare-slider-control" id="compareSlider" min="0" max="100" value="50" oninput="handleSliderChange(this.value)">
+    </div>
+  </section>
+
+  <!-- SIMULATOR CONTROL -->
+  <script>
+    function handleSliderChange(val) {
+      const shield = document.getElementById('compareShield');
+      if (shield) {
+        // Shift shield width based on slider
+        shield.style.width = `${100 - val}%`;
+      }
+    }
+  </script>
+
+</body>
+</html>

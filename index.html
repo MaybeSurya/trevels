@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpticAura | Premium Eyewear & Vision Precision</title>
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style1.css">
+  
+  <!-- Dynamic Scripts -->
+  <script src="js/products-db.js" defer></script>
+  <script src="js/shared.js" defer></script>
+  
+  <style>
+    /* Hero Slider Container */
+    .hero-slider {
+      position: relative;
+      height: 75vh;
+      min-height: 550px;
+      overflow: hidden;
+      background: #111;
+    }
+    
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding: 0 10%;
+    }
+    
+    .slide.active {
+      opacity: 1;
+    }
+    
+    .slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0,0,0,0.7) 35%, rgba(0,0,0,0.2) 100%);
+      z-index: 1;
+    }
+    
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      color: #fff;
+      transform: translateY(20px);
+      transition: transform 0.8s ease;
+    }
+    
+    .slide.active .slide-content {
+      transform: translateY(0);
+    }
+    
+    .slide-tag {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      color: #d4a373;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    
+    .slide-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+    }
+    
+    .slide-content p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      margin-bottom: 35px;
+      line-height: 1.6;
+    }
+    
+    .cta-btn {
+      display: inline-block;
+      padding: 15px 35px;
+      background: #d4a373;
+      color: #111;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 4px;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      letter-spacing: 1px;
+    }
+    
+    .cta-btn:hover {
+      background: #c59262;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(212, 163, 115, 0.35);
+    }
+    
+    .slider-nav {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 3;
+    }
+    
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .slider-dot.active {
+      background: #d4a373;
+      transform: scale(1.3);
+    }
+    
+    /* Layout Utilities */
+    .section-padding {
+      padding: 90px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .section-title-wrapper {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-subtitle {
+      color: #d4a373;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: #111;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 18px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 3px;
+      background: #d4a373;
+    }
+    
+    /* Categories Grid */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+    
+    .category-card {
+      position: relative;
+      height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      cursor: pointer;
+    }
+    
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .category-card:hover img {
+      transform: scale(1.08);
+    }
+    
+    .category-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      z-index: 2;
+    }
+    
+    .category-overlay h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    
+    .category-overlay p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+    
+    .category-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #d4a373;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .category-link::after {
+      content: '→';
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .category-card:hover .category-link::after {
+      transform: translateX(6px);
+    }
+    
+    /* Best Sellers */
+    .best-sellers-section {
+      background: #fdfbf7;
+    }
+    
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    /* Dynamic Product Cards */
+    .p-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.02);
+      border: 1px solid #f1ece1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .p-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(140, 122, 91, 0.12);
+      border-color: #d4a373;
+    }
+    
+    .p-card-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #d4a373;
+      color: #111;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 30px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    
+    .p-card-wishlist {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      font-size: 1.1rem;
+      color: #8c7a5b;
+      z-index: 2;
+    }
+    
+    .p-card-wishlist:hover {
+      transform: scale(1.1);
+      color: #c94a4a;
+      background: #fff;
+    }
+    
+    .p-card-wishlist.active {
+      color: #c94a4a !important;
+    }
+    
+    .p-card-img-wrap {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    
+    .p-card-img-wrap img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      transition: transform 0.4s ease;
+    }
+    
+    .p-card:hover .p-card-img-wrap img {
+      transform: scale(1.05);
+    }
+    
+    .p-card-cat {
+      font-size: 0.72rem;
+      color: #8c7a5b;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    
+    .p-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      height: 2.8rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .p-card-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .p-card-title a:hover {
+      color: #d4a373;
+    }
+    
+    .p-card-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #f8f6f0;
+    }
+    
+    .p-card-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111;
+    }
+    
+    .p-card-btn {
+      padding: 10px 18px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .p-card-btn:hover {
+      background: #d4a373;
+      color: #111;
+    }
+    
+    /* Trust Features Banner */
+    .features-grid-banner {
+      background: #111;
+      color: #fff;
+      padding: 70px 5%;
+    }
+    
+    .features-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 45px;
+      text-align: center;
+    }
+    
+    .feature-item {
+      padding: 10px;
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #d4a373;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    
+    .feature-item h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #d4a373;
+      letter-spacing: 0.5px;
+    }
+    
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #bbb;
+      line-height: 1.6;
+    }
+    
+    /* Testimonials */
+    .testimonials-section {
+      background: #fff;
+    }
+    
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .testimonial-card {
+      background: #fdfbf7;
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid #f1ece1;
+      transition: all 0.3s ease;
+    }
+    
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(140, 122, 91, 0.08);
+    }
+    
+    .stars {
+      color: #d4a373;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+    
+    .testimonial-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 25px;
+      font-style: italic;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #e9e5d9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #8c7a5b;
+      font-size: 1.1rem;
+    }
+    
+    .author-info h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 3px;
+    }
+    
+    .author-info p {
+      font-size: 0.8rem;
+      color: #8c7a5b;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DYNAMIC HERO CAROUSEL -->
+  <section class="hero-slider">
+    <!-- Slide 1: Eyeglasses -->
+    <div class="slide active" style="background-image: url('assets/eyeglasses_background_img.png');">
+      <div class="slide-content">
+        <span class="slide-tag">Luxury Eyewear</span>
+        <h1>Perfect Vision Meets Premium Craftsmanship</h1>
+        <p>Discover our brand new collection of hand-crafted eyeglasses, built with ultra-durable TR90 materials and tailored to frame your unique profile.</p>
+        <a href="shop.html?category=eyeglasses" class="cta-btn">EXPLORE EYEGLASSES</a>
+      </div>
+    </div>
+    
+    <!-- Slide 2: Sunglasses -->
+    <div class="slide" style="background-image: url('assets/sg.png');">
+      <div class="slide-content">
+        <span class="slide-tag">Summer Collection</span>
+        <h1>Bold Shapes & UV400 Protection Shades</h1>
+        <p>Step into the light with our curated high-fashion sunglasses range. Offering polarized shielding, double-bridge metals, and timeless class.</p>
+        <a href="shop.html?category=sunglasses" class="cta-btn">SHOP SUNGLASSES</a>
+      </div>
+    </div>
+    
+    <!-- Slide 3: Contact Lenses -->
+    <div class="slide" style="background-image: url('assets/contact.png');">
+      <div class="slide-content">
+        <span class="slide-tag">Pure Comfort</span>
+        <h1>Seamless Clarity With Premium Contacts</h1>
+        <p>Experience all-day hydration and 99% oxygen transmission with our premium selection of daily disposables and colored corrective contacts.</p>
+        <a href="shop.html?category=contacts" class="cta-btn">BROWSE CONTACTS</a>
+      </div>
+    </div>
+    
+    <!-- Slide dots navigator -->
+    <div class="slider-nav">
+      <div class="slider-dot active" onclick="setSlide(0)"></div>
+      <div class="slider-dot" onclick="setSlide(1)"></div>
+      <div class="slider-dot" onclick="setSlide(2)"></div>
+    </div>
+  </section>
+
+  <!-- LUXURY CATEGORY PORTALS -->
+  <section class="section-padding">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Categories</span>
+      <h2 class="section-title">Shop by Collection</h2>
+    </div>
+    
+    <div class="categories-grid">
+      <!-- Eyeglasses -->
+      <div class="category-card" onclick="location.href='shop.html?category=eyeglasses'">
+        <img src="assets/eyeglasses_img.png" alt="Eyeglasses">
+        <div class="category-overlay">
+          <h3>Eyeglasses</h3>
+          <p>Sophisticated frame geometries built for ultimate workspace comfort and daily style.</p>
+          <span class="category-link">View Collection</span>
+        </div>
+      </div>
+      
+      <!-- Sunglasses -->
+      <div class="category-card" onclick="location.href='shop.html?category=sunglasses'">
+        <img src="assets/sg1.png" alt="Sunglasses">
+        <div class="category-overlay">
+          <h3>Sunglasses</h3>
+          <p>Iconic high-protection polarized shades designed for bold sunlit adventures.</p>
+          <span class="category-link">View Collection</span>
+        </div>
+      </div>
+      
+      <!-- Contact Lenses -->
+      <div class="category-card" onclick="location.href='shop.html?category=contacts'">
+        <img src="assets/cont1.png" alt="Contact Lenses">
+        <div class="category-overlay">
+          <h3>Contact Lenses</h3>
+          <p>High-grade oxygen flow lenses ensuring daily comfort, moisture, and clarity.</p>
+          <span class="category-link">View Collection</span>
+        </div>
+      </div>
+      
+      <!-- Special Powers -->
+      <div class="category-card" onclick="location.href='special-power.html'">
+        <img src="assets/eyeglasses.img3.png" alt="Special Tech Lenses">
+        <div class="category-overlay">
+          <h3>Specialty Lenses</h3>
+          <p>Advanced photochromics, computer blue-cut defense, and cylindrical stabilizers.</p>
+          <span class="category-link">Explore Technology</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DYNAMIC BEST SELLERS SECTION -->
+  <section class="section-padding best-sellers-section">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Hand-picked</span>
+      <h2 class="section-title">Trending Best Sellers</h2>
+    </div>
+    
+    <div class="featured-grid" id="bestSellersGrid">
+      <!-- Populated dynamically via JS from PRODUCTS -->
+    </div>
+  </section>
+
+  <!-- BRAND TRUST HIGHLIGHTS -->
+  <section class="features-grid-banner">
+    <div class="features-container">
+      <div class="feature-item">
+        <span class="feature-icon">🛡️</span>
+        <h3>1 Year Product Warranty</h3>
+        <p>Rest easy with our premium service guarantee. All frames carry a 1-year replacement warranty on material defects.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">👁️</span>
+        <h3>Free Eye Screenings</h3>
+        <p>Book a professional test online. Get your eyes verified by our certified optometrists at any flagship boutique.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🚚</span>
+        <h3>Complimentary Shipping</h3>
+        <p>Premium experience includes free shipping on all domestic orders, packaged in our custom protective leather cases.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🔧</span>
+        <h3>Lifetime Adjustments</h3>
+        <p>Lose a temple screw or need frame re-alignment? Walk into any of our locations for a free lifetime tuning.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT TESTIMONIALS -->
+  <section class="section-padding testimonials-section">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Feedback</span>
+      <h2 class="section-title">OpticAura Experiences</h2>
+    </div>
+    
+    <div class="testimonials-grid">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"OpticAura completely changed my eyewear shopping. The glassmorphic side-cart is so smooth, and loading the product page immediately highlights the specifications. Best optical purchase ever!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AP</div>
+          <div class="author-info">
+            <h4>Ananya Patel</h4>
+            <p>Verified Buyer • John Jacobs Steel</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonial 2 -->
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I ordered a pair of polarized sunglasses and daily disposable contacts. The dynamic payment subtotal was computed perfectly with the AURA10 promo code. Highly recommend the fit!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RK</div>
+          <div class="author-info">
+            <h4>Rohan Kapoor</h4>
+            <p>Verified Buyer • Vincent Chase Polarized</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonial 3 -->
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Outstanding service! Booked an eye exam appointment in Punjab online, got my prescription verified, and the frames arrived within 3 days. The materials feel incredibly premium."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MS</div>
+          <div class="author-info">
+            <h4>Meera Singh</h4>
+            <p>Verified Buyer • Crystal Square Lenses</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO SLIDER LOGIC & DYNAMIC PRODUCTS LOADING -->
+  <script>
+    // 1. Slider Logic
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slider .slide');
+    const dots = document.querySelectorAll('.hero-slider .slider-dot');
+    let slideInterval = setInterval(nextSlide, 6000);
+
+    function nextSlide() {
+      setSlide((currentSlide + 1) % slides.length);
+    }
+
+    function setSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = index;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+      
+      // Reset timer
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 6000);
+    }
+
+    // 2. Render Featured Best Sellers Dynamically
+    document.addEventListener('DOMContentLoaded', () => {
+      // Wait slightly to ensure PRODUCTS db and shared.js badges are ready
+      setTimeout(renderBestSellers, 100);
+    });
+
+    function renderBestSellers() {
+      const grid = document.getElementById('bestSellersGrid');
+      if (!grid || typeof PRODUCTS === 'undefined') return;
+
+      // Select diverse best seller items (eyeglasses, sunglasses, contacts)
+      const bestSellerIds = ['product1', 'product5', 'sg1', 'sg12', 'cont1', 'cont4'];
+      let html = '';
+
+      bestSellerIds.forEach(id => {
+        const prod = PRODUCTS[id];
+        if (!prod) return;
+
+        const badgeHtml = id === 'product5' || id === 'sg12' ? '<span class="p-card-badge">Hot</span>' : '';
+        const inWishlistClass = window.isInWishlist && window.isInWishlist(id) ? 'active' : '';
+        const heartChar = inWishlistClass ? '❤️' : '♡';
+
+        html += `
+          <div class="p-card">
+            ${badgeHtml}
+            <div class="p-card-wishlist ${inWishlistClass}" data-id="${id}" onclick="event.stopPropagation(); handleWishlistClick('${id}', this)">
+              ${heartChar}
+            </div>
+            
+            <div class="p-card-img-wrap" onclick="location.href='product.html?id=${id}'" style="cursor:pointer;">
+              <img src="${prod.image}" alt="${prod.name}">
+            </div>
+            
+            <div>
+              <div class="p-card-cat">${prod.category}</div>
+              <h3 class="p-card-title"><a href="product.html?id=${id}">${prod.name}</a></h3>
+            </div>
+            
+            <div class="p-card-price-row">
+              <div class="p-card-price">₹${prod.price.toLocaleString()}</div>
+              <button class="p-card-btn" onclick="window.addToCart('${id}')">ADD TO BAG</button>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+
+      // Handle custom wishlist updates
+      document.addEventListener('wishlistChanged', (e) => {
+        const { productId, inWishlist } = e.detail;
+        const hearts = document.querySelectorAll(`.p-card-wishlist[data-id="${productId}"]`);
+        hearts.forEach(heart => {
+          if (inWishlist) {
+            heart.classList.add('active');
+            heart.innerText = '❤️';
+          } else {
+            heart.classList.remove('active');
+            heart.innerText = '♡';
+          }
+        });
+      });
+    }
+
+    function handleWishlistClick(id, element) {
+      if (window.toggleWishlist) {
+        window.toggleWishlist(id);
+      }
+    }
+  </script>
+</body>
+</html>
